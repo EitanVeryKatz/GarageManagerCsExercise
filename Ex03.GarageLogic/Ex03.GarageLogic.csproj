@@ -39,7 +39,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Car.cs" />
+    <Compile Include="FuelUsing.cs" />
+    <Compile Include="ElectricCar.cs" />
+    <Compile Include="ElectricMotorcycle.cs" />
     <Compile Include="FuelCar.cs" />
+    <Compile Include="FuelMotorcycle.cs" />
+    <Compile Include="Motorcycle.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleCreator.cs" />
   </ItemGroup>

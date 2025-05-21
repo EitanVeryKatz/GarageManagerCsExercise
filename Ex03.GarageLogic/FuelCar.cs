@@ -6,17 +6,37 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class FuelCar:Vehicle
+    public class FuelCar : Car, IFuelUsing
     {
-        private const int k_NumOfWheels = 4;
-        private const float k_MaximunWheelAirPressure = 32;
-        FuelCar(string i_ModelName,string i_LicenseID ) :base(i_ModelName,i_LicenseID)
+        
+        public FuelCar(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
         {
-            base.m_Wheels = new Wheel[k_NumOfWheels];
-            for(int i = 0; i < k_NumOfWheels; i++)
+        }
+
+        void IFuelUsing.fillFuel(float i_fuelAmount, e_FuelTypes i_fuelType)
+        {
+            
+        }
+
+        float IFuelUsing.MaxFuelAmount
+        {
+            get
             {
-                m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);
+                return 48;
+            }
+
+        }
+
+        e_FuelTypes IFuelUsing.FuelType
+        {
+            get
+            {
+                return e_FuelTypes.Octan98;
             }
         }
+
+        float IFuelUsing.CurrentFuelAmount
+            
+
     }
 }
