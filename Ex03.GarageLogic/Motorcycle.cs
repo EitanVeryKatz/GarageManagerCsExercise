@@ -11,6 +11,9 @@ namespace Ex03.GarageLogic
         private const int k_NumOfWheels = 2;
         private const float k_MaximunWheelAirPressure = 30;
 
+        public e_MotorcycleLicanceType Licance {  get; set; }
+        public int EngineDisplacementInCubicCentimeters {  get; set; }
+
         public Motorcycle(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
         {
             base.m_Wheels = new Wheel[k_NumOfWheels];
@@ -19,6 +22,14 @@ namespace Ex03.GarageLogic
                 m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);
             }
 
+        }
+
+        public enum e_MotorcycleLicanceType 
+        {
+            A,
+            A2,
+            AB,
+            B2
         }
 
     }

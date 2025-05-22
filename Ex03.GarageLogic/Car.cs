@@ -11,6 +11,9 @@ namespace Ex03.GarageLogic
         private const int k_NumOfWheels = 4;
         private const float k_MaximunWheelAirPressure = 32;
 
+        public e_CarColors Colors { get; set; }
+        public e_possibleAmountsOfDoors AmountsOfDoors { get; set; }
+
         public Car(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
         {
             base.m_Wheels = new Wheel[k_NumOfWheels];//initialize the wheels array
@@ -21,5 +24,22 @@ namespace Ex03.GarageLogic
 
         }
 
+        public enum e_CarColors
+        {
+            yellow,
+            black,
+            white,
+            silver
+        }
+
+        public enum e_possibleAmountsOfDoors
+        {
+            two = 2,
+            three = 3,
+            four = 4,
+            five = 5,
+        }
+
     }
+
 }

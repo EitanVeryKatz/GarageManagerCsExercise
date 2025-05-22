@@ -44,7 +44,20 @@ namespace Ex03.GarageLogic
                         r_MaximumAllowedAirPressure - CurrentAirPressure,
                         "Cannot add air beyond the maximum allowed pressure.");
                 }
+
             }
+
         }
+        public void FillAirInTires() 
+        {
+            foreach (Wheel wheel in m_Wheels)
+            {
+                float missingAir = wheel.r_MaximumAllowedAirPressure - wheel.CurrentAirPressure;
+                wheel.AddAir(missingAir);
+            }
+
+        }
+
     }
+
 }
