@@ -35,7 +35,6 @@ namespace Ex03.GarageLogic
             get { return m_Engine; }
         }
 
-        // מחלקה פנימית לגלגל
         protected class Wheel
         {
             public string m_ManufacturerName;
