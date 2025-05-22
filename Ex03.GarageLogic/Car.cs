@@ -13,10 +13,10 @@ namespace Ex03.GarageLogic
 
         public Car(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
         {
-            base.m_Wheels = new Wheel[k_NumOfWheels];
+            base.m_Wheels = new Wheel[k_NumOfWheels];//initialize the wheels array
             for (int i = 0; i < k_NumOfWheels; i++)
             {
-                m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);
+                m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);//create the wheels
             }
 
         }
