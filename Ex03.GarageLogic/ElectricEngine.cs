@@ -6,27 +6,25 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class ElectricEngine : Engine
+    public class ElectricEngine
     {
+        public float MaxHoursOfUsage {get;set;}
+        public float CurrentAmountOfHoursLeftInBattery { get;set;}
         public ElectricEngine(float i_MaxBatteryHours)
         {
-            MaxEnergyCapacity = i_MaxBatteryHours;
-            CurrentEnergyAmount = 0;
+            MaxHoursOfUsage = i_MaxBatteryHours;
+            CurrentAmountOfHoursLeftInBattery = 0;
         }
 
-        public void ChargeBattery(float i_HoursToAdd)
+        
+        public void ChargeBattery(float i_AmountToAdd)
         {
-            AddEnergy(i_HoursToAdd);
-        }
-
-        public override void AddEnergy(float i_AmountToAdd)
-        {
-            if (CurrentEnergyAmount + i_AmountToAdd > MaxEnergyCapacity)
+            if (CurrentAmountOfHoursLeftInBattery + i_AmountToAdd > MaxHoursOfUsage)
             {
-                throw new ValueOutOfRangeException(0, MaxEnergyCapacity - CurrentEnergyAmount);
+                throw new ValueOutOfRangeException(0, MaxHoursOfUsage - CurrentAmountOfHoursLeftInBattery);
             }
 
-            CurrentEnergyAmount += i_AmountToAdd;
+            CurrentAmountOfHoursLeftInBattery += i_AmountToAdd;
         }
         
     }

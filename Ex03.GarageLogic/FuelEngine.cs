@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class FuelEngine : Engine
+    public class FuelEngine
     {
+        public float MaxFuelCapacity { get; set; }
+        public float CurrentFuelAmount {  get; set; }
         public enum e_FuelTypes { Octan98, Octan96, Octan95, Soler }
-
         public e_FuelTypes FuelType { get; }
 
         public FuelEngine(e_FuelTypes i_FuelType, float i_MaxFuelCapacity)
         {
             FuelType = i_FuelType;
-            MaxEnergyCapacity = i_MaxFuelCapacity;
-            CurrentEnergyAmount = 0;
+            MaxFuelCapacity = i_MaxFuelCapacity;
+            CurrentFuelAmount = 0;
         }
 
         public void Refuel(float i_AmountToAdd, e_FuelTypes i_FuelType)
@@ -26,17 +27,17 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Wrong fuel type.");
             }
 
-            AddEnergy(i_AmountToAdd);
+            AddFuel(i_AmountToAdd);
         }
 
-        public override void AddEnergy(float i_AmountToAdd)
+        public void AddFuel(float i_AmountToAdd)
         {
-            if (CurrentEnergyAmount + i_AmountToAdd > MaxEnergyCapacity)
+            if (CurrentFuelAmount + i_AmountToAdd > MaxFuelCapacity)
             {
-                throw new ValueOutOfRangeException(0, MaxEnergyCapacity - CurrentEnergyAmount);
+                throw new ValueOutOfRangeException(0, MaxFuelCapacity - CurrentFuelAmount);
             }
 
-            CurrentEnergyAmount += i_AmountToAdd;
+            CurrentFuelAmount += i_AmountToAdd;
         }
         
     }

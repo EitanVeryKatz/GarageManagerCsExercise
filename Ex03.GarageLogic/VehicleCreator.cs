@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
                     newVehicle = new ElectricMotorcycle(i_LicenseID, i_ModelName);
                     break;
                 case "Truck":
-                    newVehicle = new Truck(i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone);
+                    newVehicle = new Truck(i_LicenseID, i_ModelName);
                     break;
             }
 

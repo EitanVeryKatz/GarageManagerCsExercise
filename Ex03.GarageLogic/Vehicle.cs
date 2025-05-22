@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
         public readonly string r_ModelName;
         public readonly string r_LicenseID;
         protected Wheel[] m_Wheels;
-        protected Engine m_Engine;
+        private float m_energySource;
 
         public Vehicle(string i_ModelName, string i_LicenseID)
         {
@@ -15,25 +15,9 @@ namespace Ex03.GarageLogic
             r_LicenseID = i_LicenseID;
         }
 
-        public float EnergySourcePercentage
-        {
-            get
-            {
-                if (m_Engine != null && m_Engine.MaxEnergyCapacity > 0)
-                {
-                    return (m_Engine.CurrentEnergyAmount / m_Engine.MaxEnergyCapacity) * 100;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
+        
 
-        public Engine Engine
-        {
-            get { return m_Engine; }
-        }
+        
 
         protected class Wheel
         {
