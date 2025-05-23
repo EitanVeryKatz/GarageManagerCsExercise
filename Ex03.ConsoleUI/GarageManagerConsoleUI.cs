@@ -16,9 +16,10 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("3. Show all vehicles");
             Console.WriteLine("4. Update vehicle status");
             Console.WriteLine("5. Inflate vehicle tires");
-            Console.WriteLine("6. Refuel/Recharge vehicle");
-            Console.WriteLine("7. Show vehicle details");
-            Console.WriteLine("8. Exit");
+            Console.WriteLine("6. Refuel vehicle");
+            Console.WriteLine("7. Recharge vehicle");
+            Console.WriteLine("8. Show vehicle details");
+            Console.WriteLine("9. Exit");
             Console.Write("Select an option: ");
         }
 
@@ -26,7 +27,7 @@ namespace Ex03.ConsoleUI
         {
             int choice = -1;
             string input = Console.ReadLine();
-            if (!int.TryParse(input, out choice) || choice < 1 || choice > 8)
+            if (!int.TryParse(input, out choice) || choice < 1 || choice > 9)
             {
                 Console.WriteLine("Illegal option, Try again.");
                 GetUserChoice();
@@ -51,12 +52,15 @@ namespace Ex03.ConsoleUI
                         // Inflate tires
                         break;
                     case 6:
-                        // Refuel/Recharge vehicle
+                        // Refuel vehicle
                         break;
                     case 7:
-                        // Show vehicle details
+                        // Recharge vehicle
                         break;
                     case 8:
+                        // Show vehicle details
+                        break;
+                    case 9:
                         // Exit
                         Environment.Exit(0);
                         break;
