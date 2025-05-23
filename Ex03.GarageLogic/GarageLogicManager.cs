@@ -43,12 +43,12 @@ namespace Ex03.GarageLogic
             return resaultList;
         }
         
-        void fillAirInVehicle(string i_LicanseIdOfVehicle)
+        public void FillAirInVehicle(string i_LicanseIdOfVehicle)
         {
             m_vehicles[i_LicanseIdOfVehicle].FillAirInAllTiresOfVehicle();
         }
 
-        private class VehicleDataAndStatus
+        public class VehicleDataAndStatus
         {
             private readonly Vehicle r_vehicle;
 
