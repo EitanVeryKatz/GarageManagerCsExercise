@@ -8,6 +8,6 @@ namespace Ex03.GarageLogic
 {
     internal interface IElectric
     {
-        void Recharge(int i_minutesToCharge);
+        void Recharge(float i_minutesToCharge);
     }
 }

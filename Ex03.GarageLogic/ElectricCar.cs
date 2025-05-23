@@ -15,9 +15,9 @@ namespace Ex03.GarageLogic
         {
         }
 
-        void IElectric.Recharge(int i_minutesToCharge)
+        void IElectric.Recharge(float i_minutesToCharge)
         {
-            m_engine.ChargeBattery((float)i_minutesToCharge / 60);
+            m_engine.ChargeBattery(i_minutesToCharge / 60);
         }
 
     }

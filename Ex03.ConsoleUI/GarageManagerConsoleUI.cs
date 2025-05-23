@@ -8,7 +8,7 @@ namespace Ex03.ConsoleUI
 {
     internal class GarageManagerConsoleUI
     {
-        private static GarageLogicManager GarageLogic = new GarageLogicManager();
+        private static GarageLogicManager r_garageLogic = new GarageLogicManager();
 
         public static void PrintMenu()
         {
@@ -45,9 +45,9 @@ namespace Ex03.ConsoleUI
                         Console.WriteLine("Please enter LicenseID:");
                         string licenseID = Console.ReadLine();
 
-                        if (GarageLogic.IsVehicleInGarage(licenseID))
+                        if (r_garageLogic.IsVehicleInGarage(licenseID))
                         {
-                            GarageLogic.ChangeVehicleStatus(licenseID, GarageLogicManager.e_StatusOfVehicleInGarage.WorkInProgress);
+                            r_garageLogic.ChangeVehicleStatus(licenseID, GarageLogicManager.e_StatusOfVehicleInGarage.WorkInProgress);
                             Console.WriteLine("Vehicle already in garage. Status updated to Work In Progress.");
                         }
                         else
@@ -65,7 +65,7 @@ namespace Ex03.ConsoleUI
                             float.TryParse(Console.ReadLine(), out currentFuelAmount);
                             bool validInput = isValidInput(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount);
                             Vehicle vehicle = VehicleCreator.CreateVehicle(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount);
-                            GarageLogic.AddNewVehicle(vehicle);
+                            r_garageLogic.AddNewVehicle(vehicle);
                             Console.WriteLine("Vehicle added to garage.");
                         }
                         break;
@@ -73,11 +73,11 @@ namespace Ex03.ConsoleUI
                     case 3:
                         Console.WriteLine("Please enter status to filter by (All/WorkInProgress/WorkFinished/Paid):");
                         string statusInput = Console.ReadLine();
-                        GarageLogicManager.e_StatusOfVehicleInGarage status;
-                        if (Enum.TryParse(statusInput, true, out status))
+
+                        if(statusInput=="All")
                         {
-                            List<string> vehicles = GarageLogic.GetAllLicanseNumbersOfVehiclesInGarage(status);
-                            Console.WriteLine("Vehicles in garage with status " + status + ":");
+                            Console.WriteLine("Showing all vehicles.");
+                            List<string> vehicles = r_garageLogic.GetAllLicanseNumbersOfVehiclesInGarage();
                             foreach (string vehicle in vehicles)
                             {
                                 Console.WriteLine(vehicle);
@@ -85,8 +85,8 @@ namespace Ex03.ConsoleUI
                         }
                         else
                         {
-                            Console.WriteLine("Showing all vehicles.");
-                            List<string> vehicles = GarageLogic.GetAllLicanseNumbersOfVehiclesInGarage();
+                            List<string> vehicles = r_garageLogic.GetAllLicanseNumbersOfVehiclesInGarage(statusInput);
+                            Console.WriteLine("Vehicles in garage with status " + statusInput + ":");
                             foreach (string vehicle in vehicles)
                             {
                                 Console.WriteLine(vehicle);
@@ -106,7 +106,7 @@ namespace Ex03.ConsoleUI
                         }
                         else
                         {
-                            GarageLogic.ChangeVehicleStatus(licenseId, o_newStatus);
+                            r_garageLogic.ChangeVehicleStatus(licenseId, o_newStatus);
                             Console.WriteLine("Vehicle status updated.");
                         }
 
@@ -114,9 +114,9 @@ namespace Ex03.ConsoleUI
                     case 5:
                         Console.WriteLine("Please enter LicenseID:");
                         string licenseIdToInflate = Console.ReadLine();
-                        if (GarageLogic.IsVehicleInGarage(licenseIdToInflate))
+                        if (r_garageLogic.IsVehicleInGarage(licenseIdToInflate))
                         {
-                            GarageLogic.FillAirInVehicle(licenseIdToInflate);
+                            r_garageLogic.FillAirInVehicle(licenseIdToInflate);
                             Console.WriteLine("Tires inflated.");
                         }
                         else
@@ -131,9 +131,11 @@ namespace Ex03.ConsoleUI
                         Console.WriteLine("Please enter amount to refuel:");
                         float amountToRefuel = 0;
                         float.TryParse(Console.ReadLine(), out amountToRefuel);
-                        if (GarageLogic.IsVehicleInGarage(licenseIdToRefuel))
+                        Console.WriteLine("Please enter fuel type: Octan98/Octan96/Octan95/Soler");
+                        string fuelChoice = Console.ReadLine();
+                        if (r_garageLogic.IsVehicleInGarage(licenseIdToRefuel))
                         {
-                            GarageLogic.RefuelVehicle(licenseIdToRefuel, amountToRefuel);
+                            r_garageLogic.RefuelVehicle(licenseIdToRefuel,fuelChoice, amountToRefuel);
                             Console.WriteLine("Vehicle refueled.");
                         }
                         else
@@ -147,9 +149,9 @@ namespace Ex03.ConsoleUI
                         Console.WriteLine("Please enter amount to recharge:");
                         float minutesToRecharge = 0;
                         float.TryParse(Console.ReadLine(), out minutesToRecharge);
-                        if (GarageLogic.IsVehicleInGarage(licenseIdToRecharge))
+                        if (r_garageLogic.IsVehicleInGarage(licenseIdToRecharge))
                         {
-                            GarageLogic.RechargeVehicle(licenseIdToRecharge, minutesToRecharge);
+                            r_garageLogic.RechargeVehicle(licenseIdToRecharge, minutesToRecharge);
                             Console.WriteLine("Vehicle recharged.");
                         }
                         else
@@ -157,19 +159,19 @@ namespace Ex03.ConsoleUI
                             Console.WriteLine("Vehicle not found in garage.");
                         }
                         break;
-                    case 8:
-                        Console.WriteLine("Please enter LicenseID:");
-                        string licenseIdToShow = Console.ReadLine();
-                        if (GarageLogic.IsVehicleInGarage(licenseIdToShow))
-                        {
-                            Vehicle vehicle = GarageLogic.GetVehicleByLicenseID(licenseIdToShow);
-                            Console.WriteLine(vehicle.ToString());
-                        }
-                        else
-                        {
-                            Console.WriteLine("Vehicle not found in garage.");
-                        }
-                        break;
+                    //case 8:
+                      //  Console.WriteLine("Please enter LicenseID:");
+                        //string licenseIdToShow = Console.ReadLine();
+                        //if (r_garageLogic.IsVehicleInGarage(licenseIdToShow))
+                        //{
+                          //  Vehicle vehicle = r_garageLogic.GetVehicleByLicenseID(licenseIdToShow);
+                            //Console.WriteLine(vehicle.ToString());
+                        //}
+                        //else
+                        //{
+                         //   Console.WriteLine("Vehicle not found in garage.");
+                        //}
+                        //break;
                     case 9:
                         Environment.Exit(0);
                         break;
@@ -199,7 +201,7 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("Invalid owner name.");
                 isValid = false;
             }
-            if (string.IsNullOrEmpty(ownerPhone) || int.TryParse(ownerPhone, out int phone))
+            if (string.IsNullOrEmpty(ownerPhone) || int.TryParse(ownerPhone, out int phone) == false)
             {
                 Console.WriteLine("Invalid owner phone.");
                 isValid = false;

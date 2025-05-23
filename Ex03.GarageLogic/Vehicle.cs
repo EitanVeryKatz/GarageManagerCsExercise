@@ -7,7 +7,6 @@ namespace Ex03.GarageLogic
         public readonly string r_ModelName;
         public readonly string r_LicenseID;
         protected Wheel[] m_Wheels;
-        private float m_energySource;
 
         public Vehicle(string i_ModelName, string i_LicenseID)
         {
@@ -66,7 +65,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void Recharge(int i_minutesToCharge)
+        public void Recharge(float i_minutesToCharge)
         {
             if (this is IElectric fuelPoweredVehicle)
             {

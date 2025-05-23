@@ -13,8 +13,8 @@ namespace Ex03.GarageLogic
 
         public void AddNewVehicle(Vehicle i_newVehicle)
         {
-        //    VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_newVehicle);
-           // m_vehicles.Add(i_newVehicle.r_LicenseID, newVehicle);
+            //VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_newVehicle);
+            //m_vehicles.Add(i_newVehicle.r_LicenseID, newVehicle);
         }
 
         public void ChangeVehicleStatus(string i_licanseIdOfVehicle, e_StatusOfVehicleInGarage i_newStatus)
@@ -27,13 +27,29 @@ namespace Ex03.GarageLogic
             return m_vehicles.Keys.ToList();
         }
 
-        public List<string> GetAllLicanseNumbersOfVehiclesInGarage(e_StatusOfVehicleInGarage i_status)
+        public List<string> GetAllLicanseNumbersOfVehiclesInGarage(string i_statusStr)
         {
+            e_StatusOfVehicleInGarage status = e_StatusOfVehicleInGarage.WorkInProgress;
             List<string> resaultList = new List<string>();
 
+            switch (i_statusStr)
+            {
+                case ("Work in progress"):
+                    status = e_StatusOfVehicleInGarage.WorkInProgress;
+                    break;
+                case ("Work finished"):
+                    status = e_StatusOfVehicleInGarage.WorkFinished;
+                    break;
+                case ("Paid"):
+                    status = e_StatusOfVehicleInGarage.Paid;
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
+            
             foreach (string licanceId in m_vehicles.Keys) 
             {
-                if (m_vehicles[licanceId].Status==i_status)
+                if (m_vehicles[licanceId].Status==status)
                 {
                     resaultList.Add(licanceId);
                 }
@@ -103,15 +119,33 @@ namespace Ex03.GarageLogic
                 r_vehicle.Refuel(i_fuelType, i_fuelAmountToAdd);
             }
 
-            public void Recharge(int i_munitesToCharge)
+            public void Recharge(float i_minutesToCharge)
             {
-                r_vehicle.Recharge(i_munitesToCharge);
+                r_vehicle.Recharge(i_minutesToCharge);
             }
         }
 
-        public void RefuelVehicle(string i_vehicleId, FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd)
+        public void RefuelVehicle(string i_vehicleId, string i_fuelTypeStr, float i_fuelAmountToAdd)
         {
-            m_vehicles[i_vehicleId].Refuel(i_fuelType, i_fuelAmountToAdd);
+            e_FuelTypes fuelType;
+            switch (i_fuelTypeStr)
+            {
+                case ("Octan98"):
+                    fuelType = e_FuelTypes.Octan98;
+                        break;
+                case ("Octan96"):
+                    fuelType = e_FuelTypes.Octan96;
+                    break;
+                case ("Octan95"):
+                    fuelType = e_FuelTypes.Octan95;
+                    break;
+                case ("Soler"):
+                    fuelType = e_FuelTypes.Soler;
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
+            m_vehicles[i_vehicleId].Refuel(fuelType, i_fuelAmountToAdd);
         }
 
         public bool IsVehicleInGarage(string i_vehicleId)
@@ -126,7 +160,7 @@ namespace Ex03.GarageLogic
             Paid
         }
 
-        public void RechargeVehicle(string i_vehicleId, int i_minutesToCharge)
+        public void RechargeVehicle(string i_vehicleId, float i_minutesToCharge)
         {
             m_vehicles[i_vehicleId].Recharge(i_minutesToCharge);
         }
