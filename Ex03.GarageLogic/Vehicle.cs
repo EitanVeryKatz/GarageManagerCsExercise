@@ -58,6 +58,22 @@ namespace Ex03.GarageLogic
 
         }
 
+        public void Refuel(FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd)
+        {
+            if(this is IFuelPowered fuelPoweredVehicle)
+            {
+                fuelPoweredVehicle.Refuel(i_fuelType, i_fuelAmountToAdd);
+            }
+        }
+
+        public void Recharge(int i_minutesToCharge)
+        {
+            if (this is IElectric fuelPoweredVehicle)
+            {
+                fuelPoweredVehicle.Recharge(i_minutesToCharge);
+            }
+        }
+
     }
 
 }

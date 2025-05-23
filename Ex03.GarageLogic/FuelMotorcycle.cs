@@ -6,14 +6,23 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class FuelMotorcycle:Motorcycle
+    public class FuelMotorcycle:Motorcycle, IFuelPowered
     {
-        private readonly FuelEngine engine = new FuelEngine(FuelEngine.e_FuelTypes.Octan98, 5.8f);
+        private readonly FuelEngine m_engine = new FuelEngine(FuelEngine.e_FuelTypes.Octan98, 5.8f);
         public FuelMotorcycle(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
         {
             
         }
         
+        void IFuelPowered.Refuel(FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd) 
+        {
+            m_engine.Refuel(i_fuelAmountToAdd, i_fuelType);
+        }
+
+        FuelEngine.e_FuelTypes IFuelPowered.GetFuelType()
+        {
+            return m_engine.FuelType;
+        }
 
     }
 }

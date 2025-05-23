@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class FuelCar : Car
+    public class FuelCar : Car, IFuelPowered
     {
        private FuelEngine m_engine = new FuelEngine(FuelEngine.e_FuelTypes.Octan98,48);
 
@@ -51,6 +51,17 @@ namespace Ex03.GarageLogic
         {
             get { return m_engine.MaxFuelCapacity; }
         }
+
+        void IFuelPowered.Refuel(FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd)
+        {
+            m_engine.Refuel(i_fuelAmountToAdd, i_fuelType);
+        }
+
+        FuelEngine.e_FuelTypes IFuelPowered.GetFuelType()
+        {
+            return m_engine.FuelType;
+        }
+
     }
     
 }

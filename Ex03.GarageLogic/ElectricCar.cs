@@ -7,16 +7,18 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class ElectricCar : Car
+    public class ElectricCar : Car,IElectric
     {
-      
+        private ElectricEngine m_engine = new ElectricEngine(4000000);
         public ElectricCar(string i_ModelName, string i_LicenseID)
             : base(i_ModelName, i_LicenseID)
         {
         }
 
-        
+        void IElectric.Recharge(int i_minutesToCharge)
+        {
+            m_engine.ChargeBattery((float)i_minutesToCharge / 60);
+        }
 
-       
     }
 }

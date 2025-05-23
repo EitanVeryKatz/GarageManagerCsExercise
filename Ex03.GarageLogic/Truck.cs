@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class Truck : Vehicle
+    internal class Truck : Vehicle, IFuelPowered
     {
         private const int k_NumOfWheels = 12;
         private const float k_MaximunWheelAirPressure = 27;
@@ -33,6 +33,16 @@ namespace Ex03.GarageLogic
                 m_engine.CurrentFuelAmount = value; 
             }
 
+        }
+
+        void IFuelPowered.Refuel(FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd)
+        {
+            m_engine.Refuel(i_fuelAmountToAdd, i_fuelType);
+        }
+
+        FuelEngine.e_FuelTypes IFuelPowered.GetFuelType()
+        {
+            return m_engine.FuelType;
         }
 
     }
