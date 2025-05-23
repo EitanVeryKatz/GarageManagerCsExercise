@@ -11,23 +11,24 @@ namespace Ex03.ConsoleUI
         public static void PrintMenu()
         {
             Console.WriteLine("===== Garage Menu =====");
-            Console.WriteLine("1. טעינת רכבים מקובץ Vehicles.db");
-            Console.WriteLine("2. הוסף רכב חדש");
-            Console.WriteLine("3. הצג את כל הרכבים");
-            Console.WriteLine("4. עדכן סטטוס רכב");
-            Console.WriteLine("5. ניפוח גלגלים לרכב");
-            Console.WriteLine("6. תדלוק/טעינת רכב");
-            Console.WriteLine("7. הצג פרטי רכב");
-            Console.WriteLine("8. יציאה");
-            Console.Write("בחר אופציה: ");
+            Console.WriteLine("1. Load vehicles from Vehicles.db");
+            Console.WriteLine("2. Add new vehicle");
+            Console.WriteLine("3. Show all vehicles");
+            Console.WriteLine("4. Update vehicle status");
+            Console.WriteLine("5. Inflate vehicle tires");
+            Console.WriteLine("6. Refuel/Recharge vehicle");
+            Console.WriteLine("7. Show vehicle details");
+            Console.WriteLine("8. Exit");
+            Console.Write("Select an option: ");
         }
+
         public static void GetUserChoice()
         {
             int choice = -1;
             string input = Console.ReadLine();
             if (!int.TryParse(input, out choice) || choice < 1 || choice > 8)
             {
-                Console.WriteLine("אופציה לא חוקית, נסה שוב.");
+                Console.WriteLine("Illegal option, Try again.");
                 GetUserChoice();
             }
             else
