@@ -10,6 +10,12 @@ namespace Ex03.ConsoleUI
     {
         public static void Main(string[] args)
         {
+            while (true)
+            {
+                GarageManagerConsoleUI.PrintMenu();
+                GarageManagerConsoleUI.GetUserChoice();
+                Console.WriteLine();
+            }
         }
     }
 }
