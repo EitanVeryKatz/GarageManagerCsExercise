@@ -22,6 +22,9 @@ namespace Ex03.GarageLogic
                 m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);//create the wheels
             }
 
+            uniqueDataMembers.Add("Color");
+            uniqueDataMembers.Add("Amount of Doors");
+
         }
 
         public enum e_CarColors

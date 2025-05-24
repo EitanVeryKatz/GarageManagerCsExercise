@@ -68,7 +68,7 @@ namespace Ex03.ConsoleUI
                             Console.WriteLine("Would you like to input data for all wheels simultaniously?(y/n)");
                             bool getAllWheelDataAtOnce = Console.ReadLine().ToLower() == "y";
 
-                            int numOfTires = r_garageLogic.GetAmountOfTires(licenseID);
+                            int numOfTires = r_garageLogic.GetAmountOfTires(licenseID);//check inputs
                             string[,] wheelData = new string[numOfTires,2];
                             if (getAllWheelDataAtOnce)
                             {
@@ -99,6 +99,14 @@ namespace Ex03.ConsoleUI
                             }
 
                             r_garageLogic.UpdateTireInfoForNewVehicle(licenseID,wheelData);
+                            string[] uniqueDataOfNewVehicle = r_garageLogic.GetUniqueDataMembersOfVehicle(licenseID);
+                            Dictionary<string,string> FilledUniqueData = new Dictionary<string,string>();
+                            foreach (string DataMember in uniqueDataOfNewVehicle)
+                            {
+                                Console.WriteLine($"Please Enter {DataMember}:");
+                                FilledUniqueData[DataMember] = Console.ReadLine();  //check input
+                            }
+                            r_garageLogic.SetUniqueMembers(licenseID, FilledUniqueData);
                             Console.WriteLine("Vehicle added to garage.");
                             
                         }

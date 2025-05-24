@@ -101,6 +101,11 @@ namespace Ex03.GarageLogic
         {
             return r_vehicle.GetAllDataForVehicle();
         }
+
+        internal void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
+        {
+            r_vehicle.SetUniqueMembers(i_FilledUniqueData);
+        }
     }
 
 }

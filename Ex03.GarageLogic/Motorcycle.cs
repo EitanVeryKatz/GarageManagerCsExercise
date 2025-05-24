@@ -21,6 +21,9 @@ namespace Ex03.GarageLogic
             {
                 m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);
             }
+            uniqueDataMembers.Add("Licanse Type");
+            uniqueDataMembers.Add("Engine Volume");
+            
 
         }
 

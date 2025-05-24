@@ -73,6 +73,10 @@ namespace Ex03.GarageLogic
             m_vehicles[i_LicanseIdOfVehicle].FillAirInAllTiresOfVehicle();
         }
 
+        public string[] GetUniqueDataMembersOfVehicle(string i_vehicleId)
+        {
+            return m_vehicles[i_vehicleId].UniqueDataMembers;
+        }
         
         public void RefuelVehicle(string i_vehicleId, string i_fuelTypeStr, float i_fuelAmountToAdd)
         {
@@ -117,6 +121,11 @@ namespace Ex03.GarageLogic
         public Dictionary<string,string> GetAllDataForVehicle(string i_vehicleId)
         {
             return m_vehicles[i_vehicleId].GetAllDataForVehicle();
+        }
+
+        public void SetUniqueMembers(string i_licenseID,Dictionary<string,string> i_FilledUniqueData)
+        {
+            m_vehicles[i_licenseID].SetUniqueMembers(i_FilledUniqueData);
         }
     }
 
