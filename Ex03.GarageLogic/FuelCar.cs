@@ -62,6 +62,26 @@ namespace Ex03.GarageLogic
             return m_engine.FuelType;
         }
 
+        protected override float EnergySourcePrecentage
+        {
+            get
+            {
+
+                return (m_engine.CurrentFuelAmount / m_engine.MaxFuelCapacity) * 100;
+            }
+
+        }
+
+        internal override Dictionary<string, string> GetAllDataForVehicle()
+        {
+            Dictionary<string, string> vehicleData = base.GetAllDataForVehicle();
+
+            vehicleData["Fuel Type"] = m_engine.FuelType.ToString();
+            vehicleData["Fuel Tank Precentage"] = string.Format("{0}%", EnergySourcePrecentage);
+
+            return vehicleData;
+        }
+
     }
     
 }

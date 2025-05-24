@@ -158,19 +158,21 @@ namespace Ex03.ConsoleUI
                             Console.WriteLine("Vehicle not found in garage.");
                         }
                         break;
-                    //case 8:
-                      //  Console.WriteLine("Please enter LicenseID:");
-                        //string licenseIdToShow = Console.ReadLine();
-                        //if (r_garageLogic.IsVehicleInGarage(licenseIdToShow))
-                        //{
-                          //  Vehicle vehicle = r_garageLogic.GetVehicleByLicenseID(licenseIdToShow);
-                            //Console.WriteLine(vehicle.ToString());
-                        //}
-                        //else
-                        //{
-                         //   Console.WriteLine("Vehicle not found in garage.");
-                        //}
-                        //break;
+                    case 8:
+                        Console.WriteLine("Please enter LicenseID:");
+                        string licenseIdToShow = Console.ReadLine();
+                        if (r_garageLogic.IsVehicleInGarage(licenseIdToShow))
+                        {
+                            foreach(KeyValuePair <string,string> pair in r_garageLogic.GetAllDataForVehicle(licenseIdToShow))
+                            {
+                                Console.WriteLine($"{pair.Key}: {pair.Value}");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Vehicle not found in garage.");
+                        }
+                        break;
                     case 9:
                         Environment.Exit(0);
                         break;

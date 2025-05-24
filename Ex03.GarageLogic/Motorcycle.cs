@@ -24,6 +24,16 @@ namespace Ex03.GarageLogic
 
         }
 
+        internal override Dictionary<string, string> GetAllDataForVehicle()
+        {
+            Dictionary<string, string> vehicleData = base.GetAllDataForVehicle();
+
+            vehicleData["LicanseType"] = Licance.ToString();
+            vehicleData["Engine Volume"] = EngineDisplacementInCubicCentimeters.ToString() + " cc";
+
+            return vehicleData;
+        }
+
         public enum e_MotorcycleLicanceType 
         {
             A,

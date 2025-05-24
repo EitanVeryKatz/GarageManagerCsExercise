@@ -20,5 +20,24 @@ namespace Ex03.GarageLogic
             m_engine.ChargeBattery(i_minutesToCharge / 60);
         }
 
+        protected override float EnergySourcePrecentage
+        {
+            get
+            {
+
+                return (m_engine.CurrentAmountOfHoursLeftInBattery / m_engine.MaxHoursOfUsage) * 100;
+            }
+
+        }
+
+        internal override Dictionary<string, string> GetAllDataForVehicle()
+        {
+            Dictionary<string, string> vehicleData = base.GetAllDataForVehicle();
+
+            vehicleData["Battery Precentage"] = string.Format("{0}%", EnergySourcePrecentage);
+
+            return vehicleData;
+        }
+
     }
 }

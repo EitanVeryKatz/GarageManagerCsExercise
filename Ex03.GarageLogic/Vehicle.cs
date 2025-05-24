@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Ex03.GarageLogic
 {
@@ -72,6 +74,21 @@ namespace Ex03.GarageLogic
                 fuelPoweredVehicle.Recharge(i_minutesToCharge);
             }
         }
+
+        internal virtual Dictionary<string, string> GetAllDataForVehicle()
+        {
+            Dictionary<string, string> VehicleData = new Dictionary<string, string>();
+            VehicleData["Vehicle Id"] = r_LicenseID;
+            VehicleData["Model Name"] = r_ModelName;
+            for (int i = 0; i < m_Wheels.Count(); i++)
+            {
+                VehicleData[$"Wheel #{i} Manufacturer"] = m_Wheels[i].m_ManufacturerName;
+                VehicleData[$"Wheel #{i} Air Pressure"] = m_Wheels[i].CurrentAirPressure.ToString();
+            }
+            return VehicleData;
+        }
+
+        protected abstract float EnergySourcePrecentage {  get; }
 
     }
 

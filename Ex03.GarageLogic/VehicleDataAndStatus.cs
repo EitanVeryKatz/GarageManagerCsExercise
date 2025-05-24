@@ -73,6 +73,11 @@ namespace Ex03.GarageLogic
         {
             r_vehicle.Recharge(i_minutesToCharge);
         }
+
+        internal Dictionary<string, string> GetAllDataForVehicle()
+        {
+            return r_vehicle.GetAllDataForVehicle();
+        }
     }
 
 }

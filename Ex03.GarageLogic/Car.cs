@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
         private const int k_NumOfWheels = 4;
         private const float k_MaximunWheelAirPressure = 32;
 
-        public e_CarColors Colors { get; set; }
+        public e_CarColors Color { get; set; }
         public e_possibleAmountsOfDoors AmountsOfDoors { get; set; }
 
         public Car(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
@@ -30,6 +30,16 @@ namespace Ex03.GarageLogic
             black,
             white,
             silver
+        }
+
+        internal override Dictionary<string, string> GetAllDataForVehicle()
+        {
+            Dictionary<string, string> vehicleData = base.GetAllDataForVehicle();
+
+            vehicleData["Car Color"] = Color.ToString();
+            vehicleData["Amount of Doors"] = AmountsOfDoors.ToString();
+
+            return vehicleData;
         }
 
         public enum e_possibleAmountsOfDoors

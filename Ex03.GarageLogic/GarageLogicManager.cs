@@ -105,5 +105,11 @@ namespace Ex03.GarageLogic
         {
             m_vehicles[i_vehicleId].Recharge(i_minutesToCharge);
         }
+
+        public Dictionary<string,string> GetAllDataForVehicle(string i_vehicleId)
+        {
+            return m_vehicles[i_vehicleId].GetAllDataForVehicle();
+        }
     }
+
 }
