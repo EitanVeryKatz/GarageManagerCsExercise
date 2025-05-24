@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
     public class ElectricCar : Car,IElectric
     {
         private ElectricEngine m_engine = new ElectricEngine(4000000);
-        public ElectricCar(string i_ModelName, string i_LicenseID)
+        public ElectricCar(string i_LicenseID, string i_ModelName)
             : base(i_ModelName, i_LicenseID)
         {
         }

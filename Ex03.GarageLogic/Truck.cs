@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
         public bool HoldsDangerousMaterial {  get; set; }
         public float CargoVolume {  get; set; }
         
-        public Truck(string i_ModelName, string i_LicenseID)
+        public Truck(string i_LicenseID, string i_ModelName)
             : base(i_ModelName, i_LicenseID)
         {
            

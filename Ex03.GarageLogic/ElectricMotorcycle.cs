@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
     {
         ElectricEngine m_engine = new ElectricEngine(1);
 
-        public ElectricMotorcycle(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
+        public ElectricMotorcycle(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
 
         }

@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
     public class FuelMotorcycle:Motorcycle, IFuelPowered
     {
         private readonly FuelEngine m_engine = new FuelEngine(FuelEngine.e_FuelTypes.Octan98, 5.8f);
-        public FuelMotorcycle(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
+        public FuelMotorcycle(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
             
         }

@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
     {
        private FuelEngine m_engine = new FuelEngine(FuelEngine.e_FuelTypes.Octan98,48);
 
-        public FuelCar(string i_ModelName, string i_LicenseID)
+        public FuelCar(string i_LicenseID, string i_ModelName)
             : base(i_ModelName, i_LicenseID)
         {
            

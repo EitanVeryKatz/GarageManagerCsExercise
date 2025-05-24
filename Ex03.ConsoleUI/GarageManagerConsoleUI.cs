@@ -64,8 +64,7 @@ namespace Ex03.ConsoleUI
                             float currentFuelAmount = 0;
                             float.TryParse(Console.ReadLine(), out currentFuelAmount);
                             bool validInput = isValidInput(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount);
-                            Vehicle vehicle = VehicleCreator.CreateVehicle(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount);
-                            r_garageLogic.AddNewVehicle(vehicle);
+                            r_garageLogic.AddNewVehicle(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount);
                             Console.WriteLine("Vehicle added to garage.");
                         }
                         break;
