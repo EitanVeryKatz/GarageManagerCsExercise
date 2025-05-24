@@ -25,7 +25,7 @@ namespace Ex03.GarageLogic
             get
             {
 
-                return (m_engine.CurrentAmountOfHoursLeftInBattery / m_engine.MaxHoursOfUsage) * 100;
+                return (m_engine.MinutesLeftInBattery / m_engine.MaxHoursOfUsage) * 100;
             }
 
         }
@@ -38,5 +38,12 @@ namespace Ex03.GarageLogic
 
             return vehicleData;
         }
+
+        internal override void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
+        {
+            m_engine.MinutesLeftInBattery = float.Parse(i_FilledUniqueData["Minutes Left in Battery"]);
+        }
+
     }
+
 }

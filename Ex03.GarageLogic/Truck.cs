@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
             base.m_Wheels = new Wheel[k_NumOfWheels];
 
             uniqueDataMembers.Add("Cargo Volume");
-            uniqueDataMembers.Add("Holds Dangerous Material(y/n)");
+            uniqueDataMembers.Add("Holds Dangerous Material");
             for (int i = 0; i < k_NumOfWheels; i++)
             {
                 m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);
@@ -75,6 +75,13 @@ namespace Ex03.GarageLogic
             VehicleData["Cargo Volume"] = CargoVolume.ToString();
 
             return VehicleData;
+        }
+
+        internal override void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
+        {
+            m_engine.CurrentFuelAmount = float.Parse(i_FilledUniqueData["Current Fuel in Tank"]);
+            CargoVolume = float.Parse(i_FilledUniqueData["Cargo Volume"]);
+            HoldsDangerousMaterial = bool.Parse(i_FilledUniqueData["Holds Dangerous Material"]);
         }
 
     }

@@ -43,5 +43,11 @@ namespace Ex03.GarageLogic
             return vehicleData;
         }
 
+        internal override void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
+        {
+            m_engine.CurrentFuelAmount = float.Parse(i_FilledUniqueData["Current Fuel in Tank"]);
+        }
+
     }
+
 }

@@ -31,9 +31,9 @@ namespace Ex03.GarageLogic
             }
             else if (this is IFuelPowered)
             {
-                uniqueDataMembers.Add("Fuel Type");
                 uniqueDataMembers.Add("Current Fuel in Tank");
             }
+
         }
 
         internal void SetTireInfo(string[,] i_tireInfo)

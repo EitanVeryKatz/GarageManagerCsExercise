@@ -9,22 +9,22 @@ namespace Ex03.GarageLogic
     public class ElectricEngine
     {
         public float MaxHoursOfUsage {get;set;}
-        public float CurrentAmountOfHoursLeftInBattery { get;set;}
+        public float MinutesLeftInBattery { get;set;}
         public ElectricEngine(float i_MaxBatteryHours)
         {
             MaxHoursOfUsage = i_MaxBatteryHours;
-            CurrentAmountOfHoursLeftInBattery = 0;
+            MinutesLeftInBattery = 0;
         }
 
         
         public void ChargeBattery(float i_AmountToAdd)
         {
-            if (CurrentAmountOfHoursLeftInBattery + i_AmountToAdd > MaxHoursOfUsage)
+            if (MinutesLeftInBattery + i_AmountToAdd > MaxHoursOfUsage)
             {
-                throw new ValueOutOfRangeException(0, MaxHoursOfUsage - CurrentAmountOfHoursLeftInBattery);
+                throw new ValueOutOfRangeException(0, MaxHoursOfUsage - MinutesLeftInBattery);
             }
 
-            CurrentAmountOfHoursLeftInBattery += i_AmountToAdd;
+            MinutesLeftInBattery += i_AmountToAdd;
         }
         
     }
