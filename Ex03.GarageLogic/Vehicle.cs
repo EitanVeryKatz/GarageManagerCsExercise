@@ -10,21 +10,40 @@ namespace Ex03.GarageLogic
         public readonly string r_LicenseID;
         protected Wheel[] m_Wheels;
 
+        public int TireCount
+        {
+            get
+            {
+               return m_Wheels.Length;
+            }
+
+        }
+
         public Vehicle(string i_ModelName, string i_LicenseID)
         {
             r_ModelName = i_ModelName;
             r_LicenseID = i_LicenseID;
         }
 
-        
+        internal void SetTireInfo(string[,] i_tireInfo)
+        {
+            for (int i = 0;i < TireCount;i++)
+            {
+                m_Wheels[i].m_ManufacturerName = i_tireInfo[i,0];
+                m_Wheels[i].CurrentAirPressure = float.Parse(i_tireInfo[i, 1]);
+            }
+        }
 
-        
+
+
 
         protected class Wheel
         {
             public string m_ManufacturerName;
             public readonly float r_MaximumAllowedAirPressure;
             public float CurrentAirPressure { get; set; }
+
+            
 
             public Wheel(float i_MaximumAllowedAirPressure)
             {

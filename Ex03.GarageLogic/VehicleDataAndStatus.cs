@@ -34,6 +34,14 @@ namespace Ex03.GarageLogic
 
         }
 
+        public int TireCount
+        {
+            get
+            {
+                return r_vehicle.TireCount;
+            }
+        }
+
         public VehicleDataAndStatus(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentFuelAmount = 0)
 
         {
@@ -72,6 +80,11 @@ namespace Ex03.GarageLogic
         public void Recharge(float i_minutesToCharge)
         {
             r_vehicle.Recharge(i_minutesToCharge);
+        }
+
+        internal void SetTireInfo(string[,] i_tireInfo)
+        {
+            r_vehicle.SetTireInfo(i_tireInfo);
         }
 
         internal Dictionary<string, string> GetAllDataForVehicle()

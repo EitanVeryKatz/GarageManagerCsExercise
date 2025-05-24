@@ -65,7 +65,42 @@ namespace Ex03.ConsoleUI
                             float.TryParse(Console.ReadLine(), out currentFuelAmount);
                             bool validInput = isValidInput(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount);
                             r_garageLogic.AddNewVehicle(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount);
+                            Console.WriteLine("Would you like to input data for all wheels simultaniously?(y/n)");
+                            bool getAllWheelDataAtOnce = Console.ReadLine().ToLower() == "y";
+
+                            int numOfTires = r_garageLogic.GetAmountOfTires(licenseID);
+                            string[,] wheelData = new string[numOfTires,2];
+                            if (getAllWheelDataAtOnce)
+                            {
+                                string wheelManufacturer;
+                                string AirPressureOfWheel;
+
+                                Console.WriteLine("Please enter tire manufacturer name:");
+                                wheelManufacturer = Console.ReadLine();
+                                Console.WriteLine("Please enter tire current Air pressure:");
+                                AirPressureOfWheel = Console.ReadLine();
+
+                                for (int i = 0; i < numOfTires; i++)
+                                {
+                                    wheelData[i, 0] = wheelManufacturer;
+                                    wheelData[i, 1] = AirPressureOfWheel;
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < numOfTires; i++)
+                                {
+                                    Console.WriteLine($"Please enter #{i} tire manufacturer name:");
+                                    wheelData[i, 0] = Console.ReadLine();
+                                    Console.WriteLine($"Please enter #{i} tire current Air pressure:");
+                                    wheelData[i, 1] = Console.ReadLine();
+                                }
+                                
+                            }
+
+                            r_garageLogic.UpdateTireInfoForNewVehicle(licenseID,wheelData);
                             Console.WriteLine("Vehicle added to garage.");
+                            
                         }
                         break;
 

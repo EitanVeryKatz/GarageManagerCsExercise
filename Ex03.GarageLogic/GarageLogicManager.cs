@@ -11,19 +11,26 @@ namespace Ex03.GarageLogic
     {
         private readonly Dictionary<string, VehicleDataAndStatus> m_vehicles = new Dictionary<string, VehicleDataAndStatus>();
 
-        public void AddNewVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentFuelAmount = 0)
+        public void AddNewVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone ,float i_CurrentFuelAmount = 0)
         {
             
             VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_VehicleType,i_LicenseID,i_ModelName,i_OwnerName,i_OwnerPhone,i_CurrentFuelAmount);
-            //add individuall shit and tires
             m_vehicles.Add(newVehicle.LicenseId, newVehicle);
         }
 
+        public void UpdateTireInfoForNewVehicle(string i_licenseID, string[,] wheelData)
+        {
+            m_vehicles[i_licenseID].SetTireInfo(wheelData);
+        }
         public void ChangeVehicleStatus(string i_licanseIdOfVehicle, e_StatusOfVehicleInGarage i_newStatus)
         {
             m_vehicles[i_licanseIdOfVehicle].Status = i_newStatus;
         }
 
+        public int GetAmountOfTires(string i_vehicleId)
+        {
+            return m_vehicles[i_vehicleId].TireCount;
+        }
         public List<string> GetAllLicanseNumbersOfVehiclesInGarage()
         {
             return m_vehicles.Keys.ToList();
