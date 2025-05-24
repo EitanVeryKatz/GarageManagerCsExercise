@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
         public bool HoldsDangerousMaterial {  get; set; }
         public float CargoVolume {  get; set; }
 
-        protected override float EnergySourcePrecentage
+        internal override float EnergySourcePrecentage
         {
             get
             {

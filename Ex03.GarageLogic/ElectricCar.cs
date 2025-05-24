@@ -20,7 +20,7 @@ namespace Ex03.GarageLogic
             m_engine.ChargeBattery(i_minutesToCharge / 60);
         }
 
-        protected override float EnergySourcePrecentage
+        internal override float EnergySourcePrecentage
         {
             get
             {

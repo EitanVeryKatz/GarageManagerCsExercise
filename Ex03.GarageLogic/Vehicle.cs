@@ -118,7 +118,7 @@ namespace Ex03.GarageLogic
             return VehicleData;
         }
 
-        protected abstract float EnergySourcePrecentage { get; set; }
+        internal abstract float EnergySourcePrecentage { get; set; }
 
         internal abstract void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData);
 

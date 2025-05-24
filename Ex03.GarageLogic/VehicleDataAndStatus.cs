@@ -106,6 +106,11 @@ namespace Ex03.GarageLogic
         {
             r_vehicle.SetUniqueMembers(i_FilledUniqueData);
         }
+
+        internal void SetEnergyPrecentage(float i_newEnergyPrecentage)
+        {
+            r_vehicle.EnergySourcePrecentage = i_newEnergyPrecentage;
+        }
     }
 
 }

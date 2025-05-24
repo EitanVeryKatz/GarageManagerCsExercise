@@ -62,7 +62,7 @@ namespace Ex03.GarageLogic
             return m_engine.FuelType;
         }
 
-        protected override float EnergySourcePrecentage
+        internal override float EnergySourcePrecentage
         {
             get
             {

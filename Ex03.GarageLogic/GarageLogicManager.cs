@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -127,6 +128,52 @@ namespace Ex03.GarageLogic
         {
             m_vehicles[i_licenseID].SetUniqueMembers(i_FilledUniqueData);
         }
+
+        private void SetEnergyPrecentageForVehicle(string i_vehicleId,float i_newEnergyPrecentage)
+        {
+            m_vehicles[i_vehicleId].SetEnergyPrecentage(i_newEnergyPrecentage);
+        }
+
+        public void GetVehiclesFromFile(string i_fileName)
+        {           
+            string[] allVehiclesInDB = File.ReadAllLines(i_fileName);
+            foreach (string line in allVehiclesInDB)
+            {   
+                float CurrentFuelAmount = 0;
+                string[] VehicleData = line.Split(',');
+                string VehicleType = VehicleData[0];
+                string LicenceId = VehicleData[1];
+                string ModelName = VehicleData[2];
+                string energyPrecentage = VehicleData[3];
+                string tierModel = VehicleData[4];
+                string CurrentAirPressure = VehicleData[5];
+                string OwnerName = VehicleData[6];
+                string OwnerPhone = VehicleData[7];
+                string[] uniqueData = GetUniqueDataMembersOfVehicle(LicenceId);
+                Dictionary<string,string> FilledUniqueData = new Dictionary<string,string>();
+                for(int i = 0; i < uniqueData.Length; i++)
+                {
+                    FilledUniqueData[uniqueData[i]] = VehicleData[8+i];
+                }
+                int numOfTires = GetAmountOfTires(LicenceId);
+                string[,] wheelData = new string[numOfTires,2];
+
+                for (int i = 0; i < numOfTires; i++)
+                {
+                    wheelData[i, 0] = tierModel;
+                    wheelData[i, 1] = CurrentAirPressure;
+                }
+
+
+                
+                AddNewVehicle(VehicleType, LicenceId, ModelName, OwnerName, OwnerPhone, CurrentFuelAmount);
+                UpdateTireInfoForNewVehicle(LicenceId, wheelData);
+                SetEnergyPrecentageForVehicle(LicenceId, float.Parse(energyPrecentage));
+                SetUniqueMembers(LicenceId, FilledUniqueData);
+                
+            }
+        }
+
     }
 
 }
