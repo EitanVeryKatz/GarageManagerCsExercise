@@ -15,6 +15,7 @@ namespace Ex03.GarageLogic
         {
             
             VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_VehicleType,i_LicenseID,i_ModelName,i_OwnerName,i_OwnerPhone,i_CurrentFuelAmount);
+            //add individuall shit and tires
             m_vehicles.Add(newVehicle.LicenseId, newVehicle);
         }
 
