@@ -24,6 +24,11 @@ namespace Ex03.GarageLogic
 
                 return (m_engine.CurrentFuelAmount / m_engine.MaxFuelCapacity) * 100;
             }
+            set
+            {
+                m_engine.CurrentFuelAmount = (value / 100) * m_engine.MaxFuelCapacity;
+            }
+
         }
 
         

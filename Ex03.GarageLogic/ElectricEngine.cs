@@ -8,20 +8,20 @@ namespace Ex03.GarageLogic
 {
     public class ElectricEngine
     {
-        public float MaxHoursOfUsage {get;set;}
+        public float MaxMinutesOfUsage {get;set;}
         public float MinutesLeftInBattery { get;set;}
         public ElectricEngine(float i_MaxBatteryHours)
         {
-            MaxHoursOfUsage = i_MaxBatteryHours;
+            MaxMinutesOfUsage = i_MaxBatteryHours;
             MinutesLeftInBattery = 0;
         }
 
         
         public void ChargeBattery(float i_AmountToAdd)
         {
-            if (MinutesLeftInBattery + i_AmountToAdd > MaxHoursOfUsage)
+            if (MinutesLeftInBattery + i_AmountToAdd > MaxMinutesOfUsage)
             {
-                throw new ValueOutOfRangeException(0, MaxHoursOfUsage - MinutesLeftInBattery);
+                throw new ValueOutOfRangeException(0, MaxMinutesOfUsage - MinutesLeftInBattery);
             }
 
             MinutesLeftInBattery += i_AmountToAdd;

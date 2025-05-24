@@ -25,9 +25,12 @@ namespace Ex03.GarageLogic
             get
             {
 
-                return (m_engine.MinutesLeftInBattery / m_engine.MaxHoursOfUsage) * 100;
+                return (m_engine.MinutesLeftInBattery / m_engine.MaxMinutesOfUsage) * 100;
             }
-
+            set
+            {
+                m_engine.MinutesLeftInBattery = (value/100) * m_engine.MaxMinutesOfUsage;
+            }
         }
 
         internal override Dictionary<string, string> GetAllDataForVehicle()
