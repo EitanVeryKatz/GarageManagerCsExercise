@@ -42,6 +42,16 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public string[] UniqueDataMembers
+        {
+            get
+            {
+                string[] dataMembers = new string[r_vehicle.uniqueDataMembers.Count];
+                r_vehicle.uniqueDataMembers.CopyTo(dataMembers);
+                return dataMembers;
+            }
+        }
+
         public VehicleDataAndStatus(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentFuelAmount = 0)
 
         {

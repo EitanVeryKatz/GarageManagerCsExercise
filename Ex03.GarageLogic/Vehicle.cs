@@ -9,6 +9,7 @@ namespace Ex03.GarageLogic
         public readonly string r_ModelName;
         public readonly string r_LicenseID;
         protected Wheel[] m_Wheels;
+        public List<string> uniqueDataMembers = new List<string>();
 
         public int TireCount
         {
