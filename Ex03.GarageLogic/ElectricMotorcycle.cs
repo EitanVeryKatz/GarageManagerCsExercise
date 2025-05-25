@@ -6,10 +6,43 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class ElectricMotorcycle:Motorcycle
+    public class ElectricMotorcycle:Motorcycle, IElectric
     {
-        public ElectricMotorcycle(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
+        ElectricEngine m_engine = new ElectricEngine(1);
+
+        public ElectricMotorcycle(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
+
         }
+
+        void IElectric.Recharge(float i_minutesToCharge)
+        {
+            m_engine.ChargeBattery(i_minutesToCharge/60);
+        }
+
+        internal override float EnergySourcePrecentage
+        {
+            get
+            {
+
+                return (m_engine.MinutesLeftInBattery / m_engine.MaxMinutesOfUsage) * 100;
+            }
+            set
+            {
+                m_engine.MinutesLeftInBattery = (value/100) * m_engine.MaxMinutesOfUsage;
+            }
+        }
+
+        internal override Dictionary<string, string> GetAllDataForVehicle()
+        {
+            Dictionary<string, string> vehicleData = base.GetAllDataForVehicle();
+
+            vehicleData["Battery Precentage"] = string.Format("{0}%", EnergySourcePrecentage);
+
+            return vehicleData;
+        }
+
+
     }
+
 }

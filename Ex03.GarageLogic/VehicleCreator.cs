@@ -4,11 +4,11 @@ namespace Ex03.GarageLogic
 {
     public abstract class VehicleCreator
     {
-        public static Vehicle CreateVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName)
+        public static Vehicle CreateVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentFuelAmount = 0)
         {
             Vehicle newVehicle = null;
 
-            switch(i_VehicleType)
+            switch (i_VehicleType)
             {
                 case "FuelCar":
                     newVehicle = new FuelCar(i_LicenseID, i_ModelName);
