@@ -25,15 +25,6 @@ namespace Ex03.GarageLogic
             r_ModelName = i_ModelName;
             r_LicenseID = i_LicenseID;
 
-            if (this is IElectric)
-            {
-                uniqueDataMembers.Add("Minutes Left in Battery");
-            }
-            else if (this is IFuelPowered)
-            {
-                uniqueDataMembers.Add("Current Fuel in Tank");
-            }
-
         }
 
         internal void SetTireInfo(string[,] i_tireInfo)

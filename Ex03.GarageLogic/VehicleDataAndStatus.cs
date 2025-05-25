@@ -99,7 +99,11 @@ namespace Ex03.GarageLogic
 
         internal Dictionary<string, string> GetAllDataForVehicle()
         {
-            return r_vehicle.GetAllDataForVehicle();
+            Dictionary<string, string> VehicleData = r_vehicle.GetAllDataForVehicle();
+            VehicleData["Owner Name"] = OwnerName;
+            VehicleData["Owner Phone"] = OwnerPhoneNumber;
+            VehicleData["Status"] = m_status.ToString();
+            return VehicleData;
         }
 
         internal void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)

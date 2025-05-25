@@ -42,10 +42,6 @@ namespace Ex03.GarageLogic
             return vehicleData;
         }
 
-        internal override void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
-        {
-            m_engine.MinutesLeftInBattery = float.Parse(i_FilledUniqueData["Minutes Left in Battery"]);
-        }
 
     }
 

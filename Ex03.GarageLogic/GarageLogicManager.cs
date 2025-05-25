@@ -134,11 +134,15 @@ namespace Ex03.GarageLogic
             m_vehicles[i_vehicleId].SetEnergyPrecentage(i_newEnergyPrecentage);
         }
 
-        public void GetVehiclesFromFile(string i_fileName)
+        public void GetVehiclesFromFile()
         {           
-            string[] allVehiclesInDB = File.ReadAllLines(i_fileName);
+            string[] allVehiclesInDB = File.ReadAllLines("Vehicles.db");
             foreach (string line in allVehiclesInDB)
-            {   
+            {
+                if (line.StartsWith("*"))
+                {
+                    break;
+                }
                 float CurrentFuelAmount = 0;
                 string[] VehicleData = line.Split(',');
                 string VehicleType = VehicleData[0];
@@ -149,12 +153,16 @@ namespace Ex03.GarageLogic
                 string CurrentAirPressure = VehicleData[5];
                 string OwnerName = VehicleData[6];
                 string OwnerPhone = VehicleData[7];
+
+                AddNewVehicle(VehicleType, LicenceId, ModelName, OwnerName, OwnerPhone, CurrentFuelAmount);
                 string[] uniqueData = GetUniqueDataMembersOfVehicle(LicenceId);
                 Dictionary<string,string> FilledUniqueData = new Dictionary<string,string>();
+
                 for(int i = 0; i < uniqueData.Length; i++)
                 {
                     FilledUniqueData[uniqueData[i]] = VehicleData[8+i];
                 }
+
                 int numOfTires = GetAmountOfTires(LicenceId);
                 string[,] wheelData = new string[numOfTires,2];
 
@@ -166,7 +174,7 @@ namespace Ex03.GarageLogic
 
 
                 
-                AddNewVehicle(VehicleType, LicenceId, ModelName, OwnerName, OwnerPhone, CurrentFuelAmount);
+                
                 UpdateTireInfoForNewVehicle(LicenceId, wheelData);
                 SetEnergyPrecentageForVehicle(LicenceId, float.Parse(energyPrecentage));
                 SetUniqueMembers(LicenceId, FilledUniqueData);

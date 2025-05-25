@@ -12,7 +12,7 @@ namespace Ex03.GarageLogic
         private const float k_MaximunWheelAirPressure = 30;
 
         public e_MotorcycleLicanceType Licance {  get; set; }
-        public int EngineDisplacementInCubicCentimeters {  get; set; }
+        public int EngineVolume {  get; set; }
 
         public Motorcycle(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
         {
@@ -23,16 +23,14 @@ namespace Ex03.GarageLogic
             }
             uniqueDataMembers.Add("Licanse Type");
             uniqueDataMembers.Add("Engine Volume");
-            
-
         }
 
         internal override Dictionary<string, string> GetAllDataForVehicle()
         {
             Dictionary<string, string> vehicleData = base.GetAllDataForVehicle();
 
-            vehicleData["LicanseType"] = Licance.ToString();
-            vehicleData["Engine Volume"] = EngineDisplacementInCubicCentimeters.ToString() + " cc";
+            vehicleData["Licanse Type"] = Licance.ToString();
+            vehicleData["Engine Volume"] = EngineVolume.ToString() + " cc";
 
             return vehicleData;
         }
@@ -44,6 +42,16 @@ namespace Ex03.GarageLogic
             AB,
             B2
         }
+
+        internal override void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
+        {
+            Licance = (e_MotorcycleLicanceType)Enum.Parse(typeof(e_MotorcycleLicanceType), i_FilledUniqueData["Licanse Type"]);
+            EngineVolume = int.Parse(i_FilledUniqueData["Engine Volume"]);
+
+            
+        }
+
+        
 
     }
 

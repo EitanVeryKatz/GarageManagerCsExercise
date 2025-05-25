@@ -39,7 +39,7 @@ namespace Ex03.ConsoleUI
                 switch (choice)
                 {
                     case 1:
-                        // Load vehicles from file
+                        r_garageLogic.GetVehiclesFromFile();
                         break;
                     case 2:
                         Console.WriteLine("Please enter LicenseID:");
