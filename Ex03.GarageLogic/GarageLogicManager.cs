@@ -172,9 +172,6 @@ namespace Ex03.GarageLogic
                     wheelData[i, 1] = CurrentAirPressure;
                 }
 
-
-                
-                
                 UpdateTireInfoForNewVehicle(LicenceId, wheelData);
                 SetEnergyPrecentageForVehicle(LicenceId, float.Parse(energyPrecentage));
                 SetUniqueMembers(LicenceId, FilledUniqueData);

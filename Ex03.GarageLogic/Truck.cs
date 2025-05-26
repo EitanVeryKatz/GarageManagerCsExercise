@@ -30,9 +30,6 @@ namespace Ex03.GarageLogic
             }
 
         }
-
-        
-
         public Truck(string i_LicenseID, string i_ModelName)
             : base(i_ModelName, i_LicenseID)
         {
