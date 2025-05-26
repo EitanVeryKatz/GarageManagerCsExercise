@@ -4,18 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Ex03.GarageLogic.FuelEngine;
+
 
 namespace Ex03.GarageLogic
 {
     public class GarageLogicManager
     {
-        public enum eVehicleStatuses
-        {
-            WorkInProgress,
-            WorkFinished,
-            Paid
-        }
 
         private readonly Dictionary<string, VehicleDataAndStatus> m_Vehicles = new Dictionary<string, VehicleDataAndStatus>();
 
@@ -30,9 +24,9 @@ namespace Ex03.GarageLogic
             m_Vehicles[i_licenseID].SetTireInfo(wheelData);
         }
 
-        public void ChangeVehicleStatus(string i_licanseIdOfVehicle, eVehicleStatuses i_newStatus)
+        public void ChangeVehicleStatus(string i_licanseIdOfVehicle, string i_newStatus ="WorkInProgress")
         {
-            m_Vehicles[i_licanseIdOfVehicle].Status = i_newStatus;
+            m_Vehicles[i_licanseIdOfVehicle].Status = (VehicleDataAndStatus.eVehicleStatuses)Enum.Parse(typeof(VehicleDataAndStatus.eVehicleStatuses),i_newStatus);
         }
 
         public int GetAmountOfTires(string i_vehicleId)
@@ -47,24 +41,10 @@ namespace Ex03.GarageLogic
 
         public List<string> GetAllLicanseNumbersOfVehiclesInGarage(string i_statusStr)
         {
-            eVehicleStatuses status = eVehicleStatuses.WorkInProgress;
+            VehicleDataAndStatus.eVehicleStatuses status;
             List<string> resaultList = new List<string>();
 
-            switch (i_statusStr)
-            {
-                case ("Work in progress"):
-                    status = eVehicleStatuses.WorkInProgress;
-                    break;
-                case ("Work finished"):
-                    status = eVehicleStatuses.WorkFinished;
-                    break;
-                case ("Paid"):
-                    status = eVehicleStatuses.Paid;
-                    break;
-                default:
-                    throw new ArgumentException();
-            }
-
+            status = (VehicleDataAndStatus.eVehicleStatuses)Enum.Parse(typeof(VehicleDataAndStatus.eVehicleStatuses), i_statusStr);
             foreach (string licanceId in m_Vehicles.Keys)
             {
                 if (m_Vehicles[licanceId].Status == status)

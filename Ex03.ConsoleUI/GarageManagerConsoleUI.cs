@@ -9,9 +9,10 @@ namespace Ex03.ConsoleUI
 {
     internal class GarageManagerConsoleUI
     {
-        private static GarageLogicManager r_garageLogic = new GarageLogicManager();
+        private GarageLogicManager r_garageLogic = new GarageLogicManager();
+        private readonly string[] r_ValidStatusArr = {"WorkInProggres","WorkFinished","Paid"};
 
-        public static void PrintMenu()
+        public void PrintMenu()
         {
             Console.WriteLine("===== Garage Menu =====");
             Console.WriteLine("1. Load vehicles from Vehicles.db");
@@ -26,7 +27,7 @@ namespace Ex03.ConsoleUI
             Console.Write("Select an option: ");
         }
 
-        public static void GetUserChoice()
+        public  void GetUserChoice()
         {
             int choice = -1;
             string input = Console.ReadLine();
@@ -68,16 +69,17 @@ namespace Ex03.ConsoleUI
                         break;
                 }
             }
+            Console.WriteLine();
         }
 
-        private static void addNewVehicleFlow()
+        private  void addNewVehicleFlow()
         {
             Console.WriteLine("Please enter LicenseID:");
             string licenseID = Console.ReadLine();
 
             if (r_garageLogic.IsVehicleInGarage(licenseID))
             {
-                r_garageLogic.ChangeVehicleStatus(licenseID, GarageLogicManager.eVehicleStatuses.WorkInProgress);
+                r_garageLogic.ChangeVehicleStatus(licenseID);
                 Console.WriteLine("Vehicle already in garage. Status updated to Work In Progress.");
             }
             else
@@ -91,7 +93,9 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("Please enter VehicleType:");
                 string vehicleType = Console.ReadLine();
 
+
                 float currentFuelAmount = getValidatedFloatInput("Please enter CurrentFuelAmount (or 0 if not applicable):");
+                float currentMinutesLeftInBattery = getValidatedFloatInput("Please enter CurrentFuelAmount (or 0 if not applicable):");
 
                 if (!isValidInput(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount))
                 {
@@ -100,18 +104,33 @@ namespace Ex03.ConsoleUI
                 }
 
                 r_garageLogic.AddNewVehicle(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount);
+                if (currentMinutesLeftInBattery > 0)
+                {
+                    try
+                    {
+                        if (currentMinutesLeftInBattery > 0)
+                        {
+                            r_garageLogic.RechargeVehicle(licenseID, currentMinutesLeftInBattery);
+                        }
+                           
+                        string[,] wheelData = collectWheelData(licenseID);
+                        r_garageLogic.UpdateTireInfoForNewVehicle(licenseID, wheelData);
 
-                string[,] wheelData = collectWheelData(licenseID);
-                r_garageLogic.UpdateTireInfoForNewVehicle(licenseID, wheelData);
+                        Dictionary<string, string> uniqueData = collectUniqueData(licenseID);
+                        r_garageLogic.SetUniqueMembers(licenseID, uniqueData);
 
-                Dictionary<string, string> uniqueData = collectUniqueData(licenseID);
-                r_garageLogic.SetUniqueMembers(licenseID, uniqueData);
-
-                Console.WriteLine("Vehicle added to garage.");
+                        Console.WriteLine("Vehicle added to garage.");
+                    }
+                    catch(Exception)
+                    {
+                        Console.WriteLine("Invalid input. Vehicle not added.");
+                    }
+                }
+                
             }
         }
 
-        private static float getValidatedFloatInput(string prompt)
+        private  float getValidatedFloatInput(string prompt)
         {
             float value;
             while (true)
@@ -127,7 +146,7 @@ namespace Ex03.ConsoleUI
             return value;
         }
 
-        private static string[,] collectWheelData(string licenseID)
+        private  string[,] collectWheelData(string licenseID)
         {
             Console.WriteLine("Would you like to input data for all wheels simultaniously?(y/n)");
             bool getAllWheelDataAtOnce = Console.ReadLine().ToLower() == "y";
@@ -158,7 +177,7 @@ namespace Ex03.ConsoleUI
             return wheelData;
         }
 
-        private static Dictionary<string, string> collectUniqueData(string licenseID)
+        private  Dictionary<string, string> collectUniqueData(string licenseID)
         {
             string[] uniqueDataOfNewVehicle = r_garageLogic.GetUniqueDataMembersOfVehicle(licenseID);
             Dictionary<string, string> filledUniqueData = new Dictionary<string, string>();
@@ -170,7 +189,7 @@ namespace Ex03.ConsoleUI
             return filledUniqueData;
         }
 
-        private static void printVehiclesByStatus()
+        private void printVehiclesByStatus()
         {
             Console.WriteLine("Please enter status to filter by (All/WorkInProgress/WorkFinished/Paid):");
             string statusInput = Console.ReadLine();
@@ -187,42 +206,44 @@ namespace Ex03.ConsoleUI
             else
             {
                 List<string> vehicles;
-                try
+                if (isValidStatus(statusInput))
                 {
                     vehicles = r_garageLogic.GetAllLicanseNumbersOfVehiclesInGarage(statusInput);
                 }
-                catch (ArgumentException)
+                else
                 {
                     Console.WriteLine($"Invalid status: {statusInput}");
                     return;
                 }
+
                 Console.WriteLine($"Vehicles in garage with status {statusInput}:");
                 foreach (string vehicle in vehicles)
                 {
                     Console.WriteLine(vehicle);
                 }
+
             }
+
         }
 
-        private static void updateVehicleStatus()
+        private  void updateVehicleStatus()
         {
             Console.WriteLine("Please enter LicenseID:");
             string licenseId = Console.ReadLine();
             Console.WriteLine("Please enter new status (WorkInProgress/WorkFinished/Paid):");
             string statusInputStr = Console.ReadLine();
-            GarageLogicManager.eVehicleStatuses o_newStatus;
-            if (!Enum.TryParse(statusInputStr, true, out o_newStatus))
+            if (isValidStatus(statusInputStr))
             {
-                Console.WriteLine("Invalid status. Please try again.");
+                r_garageLogic.ChangeVehicleStatus(licenseId,statusInputStr);
+                Console.WriteLine("Vehicle status updated.");
             }
             else
             {
-                r_garageLogic.ChangeVehicleStatus(licenseId, o_newStatus);
-                Console.WriteLine("Vehicle status updated.");
+                Console.WriteLine("Invalid status. Please try again.");
             }
         }
 
-        private static void inflateTires()
+        private  void inflateTires()
         {
             Console.WriteLine("Please enter LicenseID:");
             string licenseIdToInflate = Console.ReadLine();
@@ -237,7 +258,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void refuelVehicle()
+        private  void refuelVehicle()
         {
             Console.WriteLine("Please enter LicenseID:");
             string licenseIdToRefuel = Console.ReadLine();
@@ -266,7 +287,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void rechargeVehicle()
+        private  void rechargeVehicle()
         {
             Console.WriteLine("Please enter LicenseID:");
             string licenseIdToRecharge = Console.ReadLine();
@@ -281,6 +302,9 @@ namespace Ex03.ConsoleUI
                 catch (ValueOutOfRangeException exception)
                 {
                     Console.WriteLine(exception.Message);
+                }catch(ArgumentException)
+                {
+                    Console.WriteLine("Cannot recarge fuel powered vehicle.");
                 }
 
             }
@@ -290,7 +314,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void showVehicleDetails()
+        private  void showVehicleDetails()
         {
             Console.WriteLine("Please enter LicenseID:");
             string licenseIdToShow = Console.ReadLine();
@@ -307,7 +331,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static bool isValidInput(string vehicleType, string licenseID, string modelName, string ownerName, string ownerPhone, float currentFuelAmount)
+        private  bool isValidInput(string vehicleType, string licenseID, string modelName, string ownerName, string ownerPhone, float currentFuelAmount)
         {
             bool isValid = true;
             if (string.IsNullOrEmpty(vehicleType))
@@ -346,7 +370,7 @@ namespace Ex03.ConsoleUI
         private bool isValidPhone(string i_phone)
         {
             bool isValid = true;
-            if (i_phone.Length < 9 || i_phone.Length > 10)
+            if (i_phone.Length < 10 || i_phone.Length > 11)
             {
                 isValid = false;
             }
@@ -354,11 +378,15 @@ namespace Ex03.ConsoleUI
             {
                 string firstPartOfPhone = i_phone.Substring(0, 3);
                 string secondPartOfPhone = i_phone.Substring(4);
-                isValid = int.TryParse(firstPartOfPhone, out int result) && int.TryParse(secondPartOfPhone, out result) && i_phone[3] == '-';
+                isValid = int.TryParse(firstPartOfPhone, out int o_result) && int.TryParse(secondPartOfPhone, out o_result) && i_phone[3] == '-';
             }
             return isValid;
         }
 
+        private bool isValidStatus(string i_status)
+        {
+            return r_ValidStatusArr.Contains(i_status);
+        }
     }
 
 }

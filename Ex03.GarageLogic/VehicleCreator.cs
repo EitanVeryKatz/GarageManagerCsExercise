@@ -5,12 +5,12 @@ namespace Ex03.GarageLogic
 {
     public abstract class VehicleCreator
     {
-        public static List<string> SupportedTypes
+        public  List<string> SupportedTypes
         {
             get { return new List<string> { "FuelCar", "ElectricCar", "FuelMotorcycle", "ElectricMotorcycle", "Truck" }; }
         }
 
-        public static Vehicle CreateVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentFuelAmount = 0)
+        public  Vehicle CreateVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentFuelAmount = 0)
         {
             Vehicle newVehicle = null;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Ex03.GarageLogic.GarageLogicManager;
+
 
 namespace Ex03.GarageLogic
 {
@@ -122,6 +122,13 @@ namespace Ex03.GarageLogic
         internal void SetEnergyPrecentage(float i_newEnergyPrecentage)
         {
             r_vehicle.EnergySourcePercentage = i_newEnergyPrecentage;
+        }
+
+        public enum eVehicleStatuses
+        {
+            WorkInProgress,
+            WorkFinished,
+            Paid
         }
 
     }
