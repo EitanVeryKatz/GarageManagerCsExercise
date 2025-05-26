@@ -8,22 +8,22 @@ namespace Ex03.GarageLogic
 {
     public class FuelEngine
     {
-        public enum e_FuelTypes { Octan98, Octan96, Octan95, Soler }
+        public enum eFuelTypes { Octan98, Octan96, Octan95, Soler }
 
         public float MaxFuelCapacity { get; set; }
 
         public float CurrentFuelAmount { get; set; }
 
-        public e_FuelTypes FuelType { get; }
+        public eFuelTypes FuelType { get; }
 
-        public FuelEngine(e_FuelTypes i_FuelType, float i_MaxFuelCapacity)
+        public FuelEngine(eFuelTypes i_FuelType, float i_MaxFuelCapacity)
         {
             FuelType = i_FuelType;
             MaxFuelCapacity = i_MaxFuelCapacity;
             CurrentFuelAmount = 0;
         }
 
-        public void Refuel(float i_AmountToAdd, e_FuelTypes i_FuelType)
+        public void Refuel(float i_AmountToAdd, eFuelTypes i_FuelType)
         {
             if (i_FuelType != FuelType)
             {

@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
 {
     public abstract class Motorcycle : Vehicle
     {
-        public enum e_MotorcycleLicenseType
+        public enum eMotorcycleLicenseTypes
         {
             A,
             A2,
@@ -19,7 +19,7 @@ namespace Ex03.GarageLogic
         private const int k_NumOfWheels = 2;
         private const float k_MaximunWheelAirPressure = 30;
 
-        public e_MotorcycleLicenseType License { get; set; }
+        public eMotorcycleLicenseTypes License { get; set; }
 
         public int EngineVolume { get; set; }
 
@@ -31,8 +31,8 @@ namespace Ex03.GarageLogic
                 m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);
             }
 
-            uniqueDataMembers.Add("License Type");
-            uniqueDataMembers.Add("Engine Volume");
+            UniqueDataMembers.Add("License Type");
+            UniqueDataMembers.Add("Engine Volume");
         }
 
         internal override Dictionary<string, string> GetAllDataForVehicle()
@@ -47,7 +47,7 @@ namespace Ex03.GarageLogic
 
         internal override void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
         {
-            License = (e_MotorcycleLicenseType)Enum.Parse(typeof(e_MotorcycleLicenseType), i_FilledUniqueData["License Type"]);
+            License = (eMotorcycleLicenseTypes)Enum.Parse(typeof(eMotorcycleLicenseTypes), i_FilledUniqueData["License Type"]);
             EngineVolume = int.Parse(i_FilledUniqueData["Engine Volume"]);
         }
 

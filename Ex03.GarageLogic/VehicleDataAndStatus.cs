@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
     {
         private readonly Vehicle r_vehicle;
 
-        private e_StatusOfVehicleInGarage m_status = e_StatusOfVehicleInGarage.WorkInProgress;
+        private eVehicleStatuses m_status = eVehicleStatuses.WorkInProgress;
 
         public string OwnerName { get; private set; }
 
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        public e_StatusOfVehicleInGarage StatusOfVehicleInGarage
+        public eVehicleStatuses StatusOfVehicleInGarage
         {
             get
             {
@@ -52,8 +52,8 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                string[] dataMembers = new string[r_vehicle.uniqueDataMembers.Count];
-                r_vehicle.uniqueDataMembers.CopyTo(dataMembers);
+                string[] dataMembers = new string[r_vehicle.UniqueDataMembers.Count];
+                r_vehicle.UniqueDataMembers.CopyTo(dataMembers);
 
                 return dataMembers;
             }
@@ -72,7 +72,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        public e_StatusOfVehicleInGarage Status
+        public eVehicleStatuses Status
         {
             get
             {
@@ -90,7 +90,7 @@ namespace Ex03.GarageLogic
             r_vehicle.FillAirInTires();
         }
 
-        public void Refuel(FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd)
+        public void Refuel(FuelEngine.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
         {
             r_vehicle.Refuel(i_fuelType, i_fuelAmountToAdd);
         }

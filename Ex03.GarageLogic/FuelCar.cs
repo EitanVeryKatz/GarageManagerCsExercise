@@ -8,14 +8,14 @@ namespace Ex03.GarageLogic
 {
     public class FuelCar : Car, IFuelPowered
     {
-        private FuelEngine m_Engine = new FuelEngine(FuelEngine.e_FuelTypes.Octan98, 48);
+        private FuelEngine m_Engine = new FuelEngine(FuelEngine.eFuelTypes.Octan98, 48);
 
         public FuelCar(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
 
         }
 
-        public void Refuel(float i_AmountToAdd, FuelEngine.e_FuelTypes i_FuelType)
+        public void Refuel(float i_AmountToAdd, FuelEngine.eFuelTypes i_FuelType)
         {
             if (i_FuelType != m_Engine.FuelType)
             {
@@ -36,7 +36,7 @@ namespace Ex03.GarageLogic
             m_Engine.CurrentFuelAmount += i_AmountToAdd;
         }
 
-        public FuelEngine.e_FuelTypes FuelType
+        public FuelEngine.eFuelTypes FuelType
         {
             get { return m_Engine.FuelType; }
         }
@@ -51,12 +51,12 @@ namespace Ex03.GarageLogic
             get { return m_Engine.MaxFuelCapacity; }
         }
 
-        void IFuelPowered.Refuel(FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd)
+        void IFuelPowered.Refuel(FuelEngine.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
         {
             m_Engine.Refuel(i_fuelAmountToAdd, i_fuelType);
         }
 
-        FuelEngine.e_FuelTypes IFuelPowered.GetFuelType()
+        FuelEngine.eFuelTypes IFuelPowered.GetFuelType()
         {
             return m_Engine.FuelType;
         }

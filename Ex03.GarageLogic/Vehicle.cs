@@ -39,7 +39,7 @@ namespace Ex03.GarageLogic
         public readonly string r_ModelName;
         public readonly string r_LicenseID;
         protected Wheel[] m_Wheels;
-        public List<string> uniqueDataMembers = new List<string>();
+        public List<string> UniqueDataMembers = new List<string>();
 
         public int TireCount
         {
@@ -85,7 +85,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        public void Refuel(FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd)
+        public void Refuel(FuelEngine.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
         {
             if (this is IFuelPowered fuelPoweredVehicle)
             {

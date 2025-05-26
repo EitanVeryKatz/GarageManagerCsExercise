@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
 {
     public class GarageLogicManager
     {
-        public enum e_StatusOfVehicleInGarage
+        public enum eVehicleStatuses
         {
             WorkInProgress,
             WorkFinished,
@@ -30,7 +30,7 @@ namespace Ex03.GarageLogic
             m_Vehicles[i_licenseID].SetTireInfo(wheelData);
         }
 
-        public void ChangeVehicleStatus(string i_licanseIdOfVehicle, e_StatusOfVehicleInGarage i_newStatus)
+        public void ChangeVehicleStatus(string i_licanseIdOfVehicle, eVehicleStatuses i_newStatus)
         {
             m_Vehicles[i_licanseIdOfVehicle].Status = i_newStatus;
         }
@@ -47,19 +47,19 @@ namespace Ex03.GarageLogic
 
         public List<string> GetAllLicanseNumbersOfVehiclesInGarage(string i_statusStr)
         {
-            e_StatusOfVehicleInGarage status = e_StatusOfVehicleInGarage.WorkInProgress;
+            eVehicleStatuses status = eVehicleStatuses.WorkInProgress;
             List<string> resaultList = new List<string>();
 
             switch (i_statusStr)
             {
                 case ("Work in progress"):
-                    status = e_StatusOfVehicleInGarage.WorkInProgress;
+                    status = eVehicleStatuses.WorkInProgress;
                     break;
                 case ("Work finished"):
-                    status = e_StatusOfVehicleInGarage.WorkFinished;
+                    status = eVehicleStatuses.WorkFinished;
                     break;
                 case ("Paid"):
-                    status = e_StatusOfVehicleInGarage.Paid;
+                    status = eVehicleStatuses.Paid;
                     break;
                 default:
                     throw new ArgumentException();
@@ -89,20 +89,20 @@ namespace Ex03.GarageLogic
 
         public void RefuelVehicle(string i_vehicleId, string i_fuelTypeStr, float i_fuelAmountToAdd)
         {
-            e_FuelTypes fuelType;
+            eFuelTypes fuelType;
             switch (i_fuelTypeStr)
             {
                 case ("Octan98"):
-                    fuelType = e_FuelTypes.Octan98;
+                    fuelType = eFuelTypes.Octan98;
                     break;
                 case ("Octan96"):
-                    fuelType = e_FuelTypes.Octan96;
+                    fuelType = eFuelTypes.Octan96;
                     break;
                 case ("Octan95"):
-                    fuelType = e_FuelTypes.Octan95;
+                    fuelType = eFuelTypes.Octan95;
                     break;
                 case ("Soler"):
-                    fuelType = e_FuelTypes.Soler;
+                    fuelType = eFuelTypes.Soler;
                     break;
                 default:
                     throw new ArgumentException();

@@ -8,18 +8,18 @@ namespace Ex03.GarageLogic
 {
     public class FuelMotorcycle : Motorcycle, IFuelPowered
     {
-        private readonly FuelEngine m_Engine = new FuelEngine(FuelEngine.e_FuelTypes.Octan98, 5.8f);
+        private readonly FuelEngine m_Engine = new FuelEngine(FuelEngine.eFuelTypes.Octan98, 5.8f);
 
         public FuelMotorcycle(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
 
         }
 
-        void IFuelPowered.Refuel(FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd)
+        void IFuelPowered.Refuel(FuelEngine.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
         {
             m_Engine.Refuel(i_fuelAmountToAdd, i_fuelType);
         }
-        FuelEngine.e_FuelTypes IFuelPowered.GetFuelType()
+        FuelEngine.eFuelTypes IFuelPowered.GetFuelType()
         {
             return m_Engine.FuelType;
         }

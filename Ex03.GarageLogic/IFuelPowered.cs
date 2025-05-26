@@ -7,9 +7,9 @@ namespace Ex03.GarageLogic
 {
     public interface IFuelPowered
     {
-        void Refuel(FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd);
+        void Refuel(FuelEngine.eFuelTypes i_fuelType, float i_fuelAmountToAdd);
 
-        FuelEngine.e_FuelTypes GetFuelType();
+        FuelEngine.eFuelTypes GetFuelType();
     }
 
 }

@@ -76,7 +76,7 @@ namespace Ex03.ConsoleUI
 
             if (r_garageLogic.IsVehicleInGarage(licenseID))
             {
-                r_garageLogic.ChangeVehicleStatus(licenseID, GarageLogicManager.e_StatusOfVehicleInGarage.WorkInProgress);
+                r_garageLogic.ChangeVehicleStatus(licenseID, GarageLogicManager.eVehicleStatuses.WorkInProgress);
                 Console.WriteLine("Vehicle already in garage. Status updated to Work In Progress.");
             }
             else
@@ -209,7 +209,7 @@ namespace Ex03.ConsoleUI
             string licenseId = Console.ReadLine();
             Console.WriteLine("Please enter new status (WorkInProgress/WorkFinished/Paid):");
             string statusInputStr = Console.ReadLine();
-            GarageLogicManager.e_StatusOfVehicleInGarage o_newStatus;
+            GarageLogicManager.eVehicleStatuses o_newStatus;
             if (!Enum.TryParse(statusInputStr, true, out o_newStatus))
             {
                 Console.WriteLine("Invalid status. Please try again.");

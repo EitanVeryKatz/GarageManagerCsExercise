@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         private const int k_NumOfWheels = 12;
         private const float k_MaximunWheelAirPressure = 27;
 
-        private readonly FuelEngine m_Engine = new FuelEngine(FuelEngine.e_FuelTypes.Soler, 135);
+        private readonly FuelEngine m_Engine = new FuelEngine(FuelEngine.eFuelTypes.Soler, 135);
 
         public bool HoldsDangerousMaterial { get; set; }
 
@@ -36,8 +36,8 @@ namespace Ex03.GarageLogic
         {
             base.m_Wheels = new Wheel[k_NumOfWheels];
 
-            uniqueDataMembers.Add("Holds Dangerous Material");
-            uniqueDataMembers.Add("Cargo Volume");
+            UniqueDataMembers.Add("Holds Dangerous Material");
+            UniqueDataMembers.Add("Cargo Volume");
             for (int i = 0; i < k_NumOfWheels; i++)
             {
                 m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);
@@ -59,12 +59,12 @@ namespace Ex03.GarageLogic
 
         }
 
-        void IFuelPowered.Refuel(FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd)
+        void IFuelPowered.Refuel(FuelEngine.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
         {
             m_Engine.Refuel(i_fuelAmountToAdd, i_fuelType);
         }
 
-        FuelEngine.e_FuelTypes IFuelPowered.GetFuelType()
+        FuelEngine.eFuelTypes IFuelPowered.GetFuelType()
         {
             return m_Engine.FuelType;
         }
