@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
         {
         }
 
-        void .Recharge(float i_minutesToCharge)
+        void Recharge(float i_minutesToCharge)
         {
             m_Engine.ChargeBattery(i_minutesToCharge / 60);
         }
@@ -42,6 +42,15 @@ namespace Ex03.GarageLogic
             vehicleData["Battery Percentage"] = string.Format("{0}%", EnergySourcePercentage);
 
             return vehicleData;
+        }
+
+        public override void AddToEnergySource(float i_EnergySourceAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.None)
+        {
+            if(i_fuelType != eFuelTypes.None)
+            {
+                throw new ArgumentException("Error: tried to add fuel to electric vehicle");
+            }
+            m_Engine.ChargeBattery(i_EnergySourceAmountToAdd);
         }
 
     }

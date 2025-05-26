@@ -89,25 +89,12 @@ namespace Ex03.GarageLogic
 
         public void RefuelVehicle(string i_vehicleId, string i_fuelTypeStr, float i_fuelAmountToAdd)
         {
-            eFuelTypes fuelType;
-            switch (i_fuelTypeStr)
+            bool isValidFuelType = Enum.TryParse<Vehicle.eFuelTypes>(i_fuelTypeStr,out Vehicle.eFuelTypes fuelType);
+            if (isValidFuelType == false)
             {
-                case ("Octan98"):
-                    fuelType = eFuelTypes.Octan98;
-                    break;
-                case ("Octan96"):
-                    fuelType = eFuelTypes.Octan96;
-                    break;
-                case ("Octan95"):
-                    fuelType = eFuelTypes.Octan95;
-                    break;
-                case ("Soler"):
-                    fuelType = eFuelTypes.Soler;
-                    break;
-                default:
-                    throw new ArgumentException();
+                throw new ArgumentException();
             }
-
+                    
             m_Vehicles[i_vehicleId].Refuel(fuelType, i_fuelAmountToAdd);
         }
 

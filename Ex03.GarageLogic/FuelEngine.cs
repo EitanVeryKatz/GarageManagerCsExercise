@@ -14,16 +14,16 @@ namespace Ex03.GarageLogic
 
         public float CurrentFuelAmount { get; set; }
 
-        public eFuelTypes FuelType { get; }
+        public  Vehicle.eFuelTypes FuelType { get; }
 
-        public FuelEngine(eFuelTypes i_FuelType, float i_MaxFuelCapacity)
+        public FuelEngine(Vehicle.eFuelTypes i_FuelType, float i_MaxFuelCapacity)
         {
             FuelType = i_FuelType;
             MaxFuelCapacity = i_MaxFuelCapacity;
             CurrentFuelAmount = 0;
         }
 
-        public void Refuel(float i_AmountToAdd, eFuelTypes i_FuelType)
+        public void Refuel(float i_AmountToAdd, Vehicle.eFuelTypes i_FuelType)
         {
             if (i_FuelType != FuelType)
             {

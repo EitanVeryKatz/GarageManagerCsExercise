@@ -15,11 +15,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        void .Refuel(Vehicle.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
-        {
-            m_Engine.Refuel(i_fuelAmountToAdd, i_fuelType);
-        }
-        Vehicle.eFuelTypes .GetFuelType()
+        internal override Vehicle.eFuelTypes GetFuelType()
         {
             return m_Engine.FuelType;
         }
@@ -46,6 +42,11 @@ namespace Ex03.GarageLogic
             vehicleData["Fuel Tank Precentage"] = string.Format("{0}%", EnergySourcePercentage);
 
             return vehicleData;
+        }
+
+        public override void AddToEnergySource(float i_EnergySourceAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.None)
+        {
+            m_Engine.Refuel(i_EnergySourceAmountToAdd, i_fuelType);
         }
 
     }

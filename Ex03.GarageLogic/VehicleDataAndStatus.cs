@@ -65,11 +65,10 @@ namespace Ex03.GarageLogic
             r_vehicle = CreateVehicle(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone, i_CurrentFuelAmount);
             OwnerName = i_OwnerName;
             OwnerPhoneNumber = i_OwnerPhone;
-            if (r_vehicle is  fuelPoweredVehicle)
-            {
-                fuelPoweredVehicle.Refuel(fuelPoweredVehicle.GetFuelType(), i_CurrentFuelAmount);
+            if(i_CurrentFuelAmount > 0) {
+                Refuel(r_vehicle.GetFuelType(), i_CurrentFuelAmount);
             }
-
+            
         }
 
         public eVehicleStatuses Status
@@ -92,12 +91,12 @@ namespace Ex03.GarageLogic
 
         public void Refuel(Vehicle.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
         {
-            r_vehicle.Refuel(i_fuelType, i_fuelAmountToAdd);
+            r_vehicle.AddToEnergySource(i_fuelAmountToAdd, i_fuelType);
         }
 
         public void Recharge(float i_minutesToCharge)
         {
-            r_vehicle.Recharge(i_minutesToCharge);
+            r_vehicle.AddToEnergySource(i_minutesToCharge);
         }
 
         internal void SetTireInfo(string[,] i_tireInfo)

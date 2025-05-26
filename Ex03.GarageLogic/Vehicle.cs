@@ -87,26 +87,11 @@ namespace Ex03.GarageLogic
 
         }
 
-        public void Refuel(eFuelTypes i_fuelType, float i_fuelAmountToAdd)
-        {
-            if (this is  fuelPoweredVehicle)
-            {
-                fuelPoweredVehicle.Refuel(i_fuelType, i_fuelAmountToAdd);
-            }
+       
+        
 
-        }
+        public abstract void AddToEnergySource(float i_fuelAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.None);
 
-        public void AddToEnergySource(float i_fuelAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.Electricity)
-
-
-        public void Recharge(float i_minutesToCharge)
-        {
-            if (this is  fuelPoweredVehicle)
-            {
-                fuelPoweredVehicle.Recharge(i_minutesToCharge);
-            }
-
-        }
 
         internal virtual Dictionary<string, string> GetAllDataForVehicle()
         {
@@ -125,6 +110,11 @@ namespace Ex03.GarageLogic
         internal abstract float EnergySourcePercentage { get; set; }
 
         internal abstract void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData);
+
+        internal virtual eFuelTypes GetFuelType()
+        {
+            return eFuelTypes.None;
+        }
     }
 
 }
