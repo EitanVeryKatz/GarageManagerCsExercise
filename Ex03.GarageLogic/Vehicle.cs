@@ -36,6 +36,8 @@ namespace Ex03.GarageLogic
 
         }
 
+        public enum eFuelTypes { Octan98, Octan96, Octan95, Soler, None }
+
         public readonly string r_ModelName;
         public readonly string r_LicenseID;
         protected Wheel[] m_Wheels;
@@ -85,18 +87,21 @@ namespace Ex03.GarageLogic
 
         }
 
-        public void Refuel(FuelEngine.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
+        public void Refuel(eFuelTypes i_fuelType, float i_fuelAmountToAdd)
         {
-            if (this is IFuelPowered fuelPoweredVehicle)
+            if (this is  fuelPoweredVehicle)
             {
                 fuelPoweredVehicle.Refuel(i_fuelType, i_fuelAmountToAdd);
             }
 
         }
 
+        public void AddToEnergySource(float i_fuelAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.Electricity)
+
+
         public void Recharge(float i_minutesToCharge)
         {
-            if (this is IElectric fuelPoweredVehicle)
+            if (this is  fuelPoweredVehicle)
             {
                 fuelPoweredVehicle.Recharge(i_minutesToCharge);
             }

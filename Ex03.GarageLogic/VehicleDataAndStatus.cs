@@ -65,7 +65,7 @@ namespace Ex03.GarageLogic
             r_vehicle = CreateVehicle(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone, i_CurrentFuelAmount);
             OwnerName = i_OwnerName;
             OwnerPhoneNumber = i_OwnerPhone;
-            if (r_vehicle is IFuelPowered fuelPoweredVehicle)
+            if (r_vehicle is  fuelPoweredVehicle)
             {
                 fuelPoweredVehicle.Refuel(fuelPoweredVehicle.GetFuelType(), i_CurrentFuelAmount);
             }
@@ -90,7 +90,7 @@ namespace Ex03.GarageLogic
             r_vehicle.FillAirInTires();
         }
 
-        public void Refuel(FuelEngine.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
+        public void Refuel(Vehicle.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
         {
             r_vehicle.Refuel(i_fuelType, i_fuelAmountToAdd);
         }

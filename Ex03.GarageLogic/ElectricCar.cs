@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class ElectricCar : Car, IElectric
+    public class ElectricCar : Car
     {
         private const float k_MaxBatteryCapacityMinutes = 4000000;
 
@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
         {
         }
 
-        void IElectric.Recharge(float i_minutesToCharge)
+        void .Recharge(float i_minutesToCharge)
         {
             m_Engine.ChargeBattery(i_minutesToCharge / 60);
         }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class Truck : Vehicle, IFuelPowered
+    internal class Truck : Vehicle
     {
         private const int k_NumOfWheels = 12;
         private const float k_MaximunWheelAirPressure = 27;
 
-        private readonly FuelEngine m_Engine = new FuelEngine(FuelEngine.eFuelTypes.Soler, 135);
+        private readonly FuelEngine m_Engine = new FuelEngine(Vehicle.eFuelTypes.Soler, 135);
 
         public bool HoldsDangerousMaterial { get; set; }
 
@@ -59,12 +59,12 @@ namespace Ex03.GarageLogic
 
         }
 
-        void IFuelPowered.Refuel(FuelEngine.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
+        void .Refuel(Vehicle.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
         {
             m_Engine.Refuel(i_fuelAmountToAdd, i_fuelType);
         }
 
-        FuelEngine.eFuelTypes IFuelPowered.GetFuelType()
+        Vehicle.eFuelTypes .GetFuelType()
         {
             return m_Engine.FuelType;
         }

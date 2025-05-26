@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class ElectricMotorcycle : Motorcycle, IElectric
+    public class ElectricMotorcycle : Motorcycle
     {
         ElectricEngine m_Engine = new ElectricEngine(1);
 
@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        void IElectric.Recharge(float i_minutesToCharge)
+        void .Recharge(float i_minutesToCharge)
         {
             m_Engine.ChargeBattery(i_minutesToCharge / 60);
         }
