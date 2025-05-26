@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -25,6 +26,8 @@ namespace Ex03.GarageLogic
                 case "Truck":
                     newVehicle = new Truck(i_LicenseID, i_ModelName);
                     break;
+                default:
+                    throw new ArgumentException();
             }
 
             return newVehicle;

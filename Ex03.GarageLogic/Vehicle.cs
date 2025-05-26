@@ -32,7 +32,15 @@ namespace Ex03.GarageLogic
             for (int i = 0;i < TireCount;i++)
             {
                 m_Wheels[i].m_ManufacturerName = i_tireInfo[i,0];
-                m_Wheels[i].CurrentAirPressure = float.Parse(i_tireInfo[i, 1]);
+                try
+                {
+                    m_Wheels[i].CurrentAirPressure = float.Parse(i_tireInfo[i, 1]);
+                }
+                catch (FormatException)
+                {
+                    throw new FormatException("Invalid air pressure format. Please enter a valid number.");
+                }
+
             }
         }
 
