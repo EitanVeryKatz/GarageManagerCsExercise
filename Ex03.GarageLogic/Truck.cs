@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         private const int k_NumOfWheels = 12;
         private const float k_MaximunWheelAirPressure = 27;
 
-        private readonly FuelEngine m_engine = new FuelEngine(FuelEngine.e_FuelTypes.Soler, 135);
+        private readonly FuelEngine m_Engine = new FuelEngine(FuelEngine.e_FuelTypes.Soler, 135);
 
         public bool HoldsDangerousMaterial { get; set; }
 
@@ -24,11 +24,11 @@ namespace Ex03.GarageLogic
             get
             {
 
-                return (m_engine.CurrentFuelAmount / m_engine.MaxFuelCapacity) * 100;
+                return (m_Engine.CurrentFuelAmount / m_Engine.MaxFuelCapacity) * 100;
             }
             set
             {
-                m_engine.CurrentFuelAmount = (value / 100) * m_engine.MaxFuelCapacity;
+                m_Engine.CurrentFuelAmount = (value / 100) * m_Engine.MaxFuelCapacity;
             }
 
         }
@@ -49,24 +49,24 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_engine.CurrentFuelAmount;
+                return m_Engine.CurrentFuelAmount;
             }
 
             private set
             {
-                m_engine.CurrentFuelAmount = value;
+                m_Engine.CurrentFuelAmount = value;
             }
 
         }
 
         void IFuelPowered.Refuel(FuelEngine.e_FuelTypes i_fuelType, float i_fuelAmountToAdd)
         {
-            m_engine.Refuel(i_fuelAmountToAdd, i_fuelType);
+            m_Engine.Refuel(i_fuelAmountToAdd, i_fuelType);
         }
 
         FuelEngine.e_FuelTypes IFuelPowered.GetFuelType()
         {
-            return m_engine.FuelType;
+            return m_Engine.FuelType;
         }
 
         internal override Dictionary<string, string> GetAllDataForVehicle()

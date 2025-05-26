@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
     {
         private const float k_MaxBatteryCapacityMinutes = 4000000;
 
-        private ElectricEngine m_engine = new ElectricEngine(k_MaxBatteryCapacityMinutes);
+        private ElectricEngine m_Engine = new ElectricEngine(k_MaxBatteryCapacityMinutes);
 
         public ElectricCar(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
 
         void IElectric.Recharge(float i_minutesToCharge)
         {
-            m_engine.ChargeBattery(i_minutesToCharge / 60);
+            m_Engine.ChargeBattery(i_minutesToCharge / 60);
         }
 
         internal override float EnergySourcePercentage
@@ -26,11 +26,11 @@ namespace Ex03.GarageLogic
             get
             {
 
-                return (m_engine.MinutesLeftInBattery / m_engine.MaxMinutesOfUsage) * 100;
+                return (m_Engine.MinutesLeftInBattery / m_Engine.MaxMinutesOfUsage) * 100;
             }
             set
             {
-                m_engine.MinutesLeftInBattery = (value / 100) * m_engine.MaxMinutesOfUsage;
+                m_Engine.MinutesLeftInBattery = (value / 100) * m_Engine.MaxMinutesOfUsage;
             }
 
         }

@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
 {
     public class ElectricMotorcycle : Motorcycle, IElectric
     {
-        ElectricEngine m_engine = new ElectricEngine(1);
+        ElectricEngine m_Engine = new ElectricEngine(1);
 
         public ElectricMotorcycle(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
@@ -17,18 +17,18 @@ namespace Ex03.GarageLogic
 
         void IElectric.Recharge(float i_minutesToCharge)
         {
-            m_engine.ChargeBattery(i_minutesToCharge / 60);
+            m_Engine.ChargeBattery(i_minutesToCharge / 60);
         }
 
         internal override float EnergySourcePercentage
         {
             get
             {
-                return (m_engine.MinutesLeftInBattery / m_engine.MaxMinutesOfUsage) * 100;
+                return (m_Engine.MinutesLeftInBattery / m_Engine.MaxMinutesOfUsage) * 100;
             }
             set
             {
-                m_engine.MinutesLeftInBattery = (value / 100) * m_engine.MaxMinutesOfUsage;
+                m_Engine.MinutesLeftInBattery = (value / 100) * m_Engine.MaxMinutesOfUsage;
             }
 
         }
