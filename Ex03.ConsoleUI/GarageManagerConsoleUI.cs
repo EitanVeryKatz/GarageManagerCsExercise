@@ -89,18 +89,15 @@ namespace Ex03.ConsoleUI
                 string ownerPhone = Console.ReadLine();
                 Console.WriteLine("Please enter VehicleType:");
                 string vehicleType = Console.ReadLine();
-                Console.WriteLine("Please enter CurrentFuelAmount (or 0 if not applicable):");
-                float currentFuelAmount = 0;
-                
-                try
+
+                float currentFuelAmount = getValidatedFloatInput("Please enter CurrentFuelAmount (or 0 if not applicable):");
+
+                if (!isValidInput(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount))
                 {
-                    float.TryParse(Console.ReadLine(), out currentFuelAmount);
+                    Console.WriteLine("Invalid input. Vehicle not added.");
+                    return;
                 }
-                catch (FormatException)
-                {
-                    throw new FormatException("Invalid fuel amount format. Please enter a valid number.");
-                }
-                bool validInput = isValidInput(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount);
+
                 r_garageLogic.AddNewVehicle(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount);
 
                 string[,] wheelData = collectWheelData(licenseID);
@@ -111,6 +108,22 @@ namespace Ex03.ConsoleUI
 
                 Console.WriteLine("Vehicle added to garage.");
             }
+        }
+
+        private static float getValidatedFloatInput(string prompt)
+        {
+            float value;
+            while (true)
+            {
+                Console.WriteLine(prompt);
+                string input = Console.ReadLine();
+                if (float.TryParse(input, out value) && value >= 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid input. Please enter a non-negative number.");
+            }
+            return value;
         }
 
         private static string[,] collectWheelData(string licenseID)
@@ -124,8 +137,7 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("Please enter tire manufacturer name:");
                 string wheelManufacturer = Console.ReadLine();
-                Console.WriteLine("Please enter tire current Air pressure:");
-                string airPressure = Console.ReadLine();
+                string airPressure = getValidatedFloatInput("Please enter tire current Air pressure:").ToString();
 
                 for (int i = 0; i < numOfTires; i++)
                 {
@@ -139,8 +151,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine($"Please enter #{i} tire manufacturer name:");
                     wheelData[i, 0] = Console.ReadLine();
-                    Console.WriteLine($"Please enter #{i} tire current Air pressure:");
-                    wheelData[i, 1] = Console.ReadLine();
+                    wheelData[i, 1] = getValidatedFloatInput($"Please enter #{i} tire current Air pressure:").ToString();
                 }
             }
             return wheelData;
@@ -174,7 +185,16 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                List<string> vehicles = r_garageLogic.GetAllLicanseNumbersOfVehiclesInGarage(statusInput);
+                List<string> vehicles;
+                try
+                {
+                    vehicles = r_garageLogic.GetAllLicanseNumbersOfVehiclesInGarage(statusInput);
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine($"Invalid status: {statusInput}");
+                    return;
+                }
                 Console.WriteLine($"Vehicles in garage with status {statusInput}:");
                 foreach (string vehicle in vehicles)
                 {
@@ -185,22 +205,12 @@ namespace Ex03.ConsoleUI
 
         private static void updateVehicleStatus()
         {
-            bool isStatusValid = false;
             Console.WriteLine("Please enter LicenseID:");
             string licenseId = Console.ReadLine();
             Console.WriteLine("Please enter new status (WorkInProgress/WorkFinished/Paid):");
             string statusInputStr = Console.ReadLine();
             GarageLogicManager.e_StatusOfVehicleInGarage o_newStatus;
-            try
-            {
-                isStatusValid = Enum.TryParse(statusInputStr, true, out o_newStatus);
-
-            }
-            catch (FormatException)
-            {
-                throw new FormatException("Invalid status format. Please enter a valid string.");
-            }
-            if (isStatusValid == false)
+            if (!Enum.TryParse(statusInputStr, true, out o_newStatus))
             {
                 Console.WriteLine("Invalid status. Please try again.");
             }
@@ -230,15 +240,20 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Please enter LicenseID:");
             string licenseIdToRefuel = Console.ReadLine();
-            Console.WriteLine("Please enter amount to refuel:");
-            float amountToRefuel = 0;
-            float.TryParse(Console.ReadLine(), out amountToRefuel);
+            float amountToRefuel = getValidatedFloatInput("Please enter amount to refuel:");
             Console.WriteLine("Please enter fuel type: Octan98/Octan96/Octan95/Soler");
             string fuelChoice = Console.ReadLine();
             if (r_garageLogic.IsVehicleInGarage(licenseIdToRefuel))
             {
-                r_garageLogic.RefuelVehicle(licenseIdToRefuel, fuelChoice, amountToRefuel);
-                Console.WriteLine("Vehicle refueled.");
+                try
+                {
+                    r_garageLogic.RefuelVehicle(licenseIdToRefuel, fuelChoice, amountToRefuel);
+                    Console.WriteLine("Vehicle refueled.");
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine($"Invalid fuel type: {fuelChoice}");
+                }
             }
             else
             {
@@ -250,17 +265,7 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Please enter LicenseID:");
             string licenseIdToRecharge = Console.ReadLine();
-            Console.WriteLine("Please enter amount to recharge:");
-            float minutesToRecharge = 0;
-            try
-            {
-                float.TryParse(Console.ReadLine(), out minutesToRecharge);
-
-            }
-            catch (FormatException)
-            {
-                throw new FormatException("Invalid minutes-to-charge format. Please enter a valid number.");
-            }
+            float minutesToRecharge = getValidatedFloatInput("Please enter amount to recharge:");
             if (r_garageLogic.IsVehicleInGarage(licenseIdToRecharge))
             {
                 r_garageLogic.RechargeVehicle(licenseIdToRecharge, minutesToRecharge);
@@ -312,7 +317,7 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("Invalid owner name.");
                 isValid = false;
             }
-            if (string.IsNullOrEmpty(ownerPhone) || int.TryParse(ownerPhone, out int phone) == false)
+            if (string.IsNullOrEmpty(ownerPhone) || !long.TryParse(ownerPhone, out _) || ownerPhone.Length < 7)
             {
                 Console.WriteLine("Invalid owner phone.");
                 isValid = false;
@@ -321,13 +326,7 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("Invalid fuel amount.");
                 isValid = false;
-                string input = Console.ReadLine();
-                if (!float.TryParse(input, out currentFuelAmount))
-                {
-                    throw new FormatException("Invalid fuel amount format. Please enter a valid number.");
-                }
             }
-
             return isValid;
         }
     }
