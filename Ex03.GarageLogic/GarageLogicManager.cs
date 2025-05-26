@@ -123,6 +123,19 @@ namespace Ex03.GarageLogic
             m_Vehicles[i_vehicleId].SetEnergyPrecentage(i_newEnergyPrecentage);
         }
 
+        private enum eDbIndex
+        {
+            VehicleType,
+            LicenceID,
+            ModelName,
+            EnergyPrecentage,
+            TireModel,
+            CurrentAirPressure,
+            OwnerName,
+            OwnerPhone,
+            StartOfUniqueData
+        }
+
         public void GetVehiclesFromFile()
         {
             string[] allVehiclesInDB = File.ReadAllLines("Vehicles.db");
@@ -134,14 +147,14 @@ namespace Ex03.GarageLogic
                 }
                 float CurrentFuelAmount = 0;
                 string[] VehicleData = line.Split(',');
-                string VehicleType = VehicleData[0];
-                string LicenceId = VehicleData[1];
-                string ModelName = VehicleData[2];
-                string energyPrecentage = VehicleData[3];
-                string tierModel = VehicleData[4];
-                string CurrentAirPressure = VehicleData[5];
-                string OwnerName = VehicleData[6];
-                string OwnerPhone = VehicleData[7];
+                string VehicleType = VehicleData[(int)eDbIndex.VehicleType];
+                string LicenceId = VehicleData[(int)eDbIndex.LicenceID];
+                string ModelName = VehicleData[(int)eDbIndex.ModelName];
+                string energyPrecentage = VehicleData[(int)eDbIndex.EnergyPrecentage];
+                string tierModel = VehicleData[(int)eDbIndex.TireModel];
+                string CurrentAirPressure = VehicleData[(int)eDbIndex.CurrentAirPressure];
+                string OwnerName = VehicleData[(int)eDbIndex.OwnerName];
+                string OwnerPhone = VehicleData[(int)eDbIndex.OwnerPhone];
 
                 AddNewVehicle(VehicleType, LicenceId, ModelName, OwnerName, OwnerPhone, CurrentFuelAmount);
                 string[] uniqueData = GetUniqueDataMembersOfVehicle(LicenceId);
@@ -149,7 +162,7 @@ namespace Ex03.GarageLogic
 
                 for (int i = 0; i < uniqueData.Length; i++)
                 {
-                    FilledUniqueData[uniqueData[i]] = VehicleData[8 + i];
+                    FilledUniqueData[uniqueData[i]] = VehicleData[(int)eDbIndex.StartOfUniqueData + i];
                 }
 
                 int numOfTires = GetAmountOfTires(LicenceId);

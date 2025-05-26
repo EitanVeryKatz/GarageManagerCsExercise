@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -329,7 +330,7 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("Invalid owner name.");
                 isValid = false;
             }
-            if (string.IsNullOrEmpty(ownerPhone) || !long.TryParse(ownerPhone, out _) || ownerPhone.Length < 7)
+            if (string.IsNullOrEmpty(ownerPhone) || isValidPhone(ownerPhone) == false)
             {
                 Console.WriteLine("Invalid owner phone.");
                 isValid = false;
@@ -341,6 +342,23 @@ namespace Ex03.ConsoleUI
             }
             return isValid;
         }
+
+        private bool isValidPhone(string i_phone)
+        {
+            bool isValid = true;
+            if (i_phone.Length < 9 || i_phone.Length > 10)
+            {
+                isValid = false;
+            }
+            else
+            {
+                string firstPartOfPhone = i_phone.Substring(0, 3);
+                string secondPartOfPhone = i_phone.Substring(4);
+                isValid = int.TryParse(firstPartOfPhone, out int result) && int.TryParse(secondPartOfPhone, out result) && i_phone[3] == '-';
+            }
+            return isValid;
+        }
+
     }
 
 }
