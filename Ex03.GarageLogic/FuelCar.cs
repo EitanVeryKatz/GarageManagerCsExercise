@@ -8,12 +8,12 @@ namespace Ex03.GarageLogic
 {
     public class FuelCar : Car, IFuelPowered
     {
-       private FuelEngine m_engine = new FuelEngine(FuelEngine.e_FuelTypes.Octan98,48);
+        private FuelEngine m_engine = new FuelEngine(FuelEngine.e_FuelTypes.Octan98, 48);
 
         public FuelCar(string i_LicenseID, string i_ModelName)
             : base(i_ModelName, i_LicenseID)
         {
-           
+
         }
 
         public void Refuel(float i_AmountToAdd, FuelEngine.e_FuelTypes i_FuelType)
@@ -88,5 +88,5 @@ namespace Ex03.GarageLogic
         }
 
     }
-    
+
 }

@@ -35,7 +35,7 @@ namespace Ex03.GarageLogic
 
         public static List<string> SupportedTypes
         {
-            get{return new List<string> { "FuelCar", "ElectricCar", "FuelMotorcycle", "ElectricMotorcycle", "Truck" }; }
+            get { return new List<string> { "FuelCar", "ElectricCar", "FuelMotorcycle", "ElectricMotorcycle", "Truck" }; }
         }
     }
 }

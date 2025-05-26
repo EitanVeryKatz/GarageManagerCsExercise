@@ -7,7 +7,7 @@ using static Ex03.GarageLogic.GarageLogicManager;
 
 namespace Ex03.GarageLogic
 {
-    public class VehicleDataAndStatus:VehicleCreator
+    public class VehicleDataAndStatus : VehicleCreator
     {
         private readonly Vehicle r_vehicle;
 

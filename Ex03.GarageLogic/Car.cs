@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public abstract class Car:Vehicle
+    public abstract class Car : Vehicle
     {
         private const int k_NumOfWheels = 4;
         private const float k_MaximunWheelAirPressure = 32;
@@ -17,10 +17,10 @@ namespace Ex03.GarageLogic
 
         public Car(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
         {
-            base.m_Wheels = new Wheel[k_NumOfWheels];//initialize the wheels array
+            base.m_Wheels = new Wheel[k_NumOfWheels];
             for (int i = 0; i < k_NumOfWheels; i++)
             {
-                m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);//create the wheels
+                m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);
             }
 
             uniqueDataMembers.Add("Car Color");
@@ -46,16 +46,13 @@ namespace Ex03.GarageLogic
             return vehicleData;
         }
 
-        
-
         internal override void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
         {
-            Color = (e_CarColors)Enum.Parse(typeof(e_CarColors),i_FilledUniqueData["Car Color"]);
+            Color = (e_CarColors)Enum.Parse(typeof(e_CarColors), i_FilledUniqueData["Car Color"]);
             AmountsOfDoors = int.Parse(i_FilledUniqueData["Amount of Doors"]);
 
         }
 
-       
     }
 
 }

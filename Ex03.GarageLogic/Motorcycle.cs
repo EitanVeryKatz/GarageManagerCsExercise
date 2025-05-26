@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public abstract class Motorcycle:Vehicle
+    public abstract class Motorcycle : Vehicle
     {
         private const int k_NumOfWheels = 2;
         private const float k_MaximunWheelAirPressure = 30;
 
-        public e_MotorcycleLicanceType Licance {  get; set; }
-        public int EngineVolume {  get; set; }
+        public e_MotorcycleLicanceType Licance { get; set; }
+        public int EngineVolume { get; set; }
 
         public Motorcycle(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
         {
@@ -35,7 +35,7 @@ namespace Ex03.GarageLogic
             return vehicleData;
         }
 
-        public enum e_MotorcycleLicanceType 
+        public enum e_MotorcycleLicanceType
         {
             A,
             A2,
@@ -48,7 +48,7 @@ namespace Ex03.GarageLogic
             Licance = (e_MotorcycleLicanceType)Enum.Parse(typeof(e_MotorcycleLicanceType), i_FilledUniqueData["Licanse Type"]);
             EngineVolume = int.Parse(i_FilledUniqueData["Engine Volume"]);
 
-            
+
         }
 
     }

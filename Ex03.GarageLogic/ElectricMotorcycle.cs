@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class ElectricMotorcycle:Motorcycle, IElectric
+    public class ElectricMotorcycle : Motorcycle, IElectric
     {
         ElectricEngine m_engine = new ElectricEngine(1);
 
@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
 
         void IElectric.Recharge(float i_minutesToCharge)
         {
-            m_engine.ChargeBattery(i_minutesToCharge/60);
+            m_engine.ChargeBattery(i_minutesToCharge / 60);
         }
 
         internal override float EnergySourcePrecentage
@@ -29,7 +29,7 @@ namespace Ex03.GarageLogic
             }
             set
             {
-                m_engine.MinutesLeftInBattery = (value/100) * m_engine.MaxMinutesOfUsage;
+                m_engine.MinutesLeftInBattery = (value / 100) * m_engine.MaxMinutesOfUsage;
             }
         }
 
