@@ -6,6 +6,36 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
+        protected class Wheel
+        {
+            public string m_ManufacturerName;
+            public readonly float r_MaximumAllowedAirPressure;
+            public float CurrentAirPressure { get; set; }
+
+            public Wheel(float i_MaximumAllowedAirPressure)
+            {
+                r_MaximumAllowedAirPressure = i_MaximumAllowedAirPressure;
+                CurrentAirPressure = 0;
+            }
+
+            public void AddAir(float i_AirToAdd)
+            {
+                if (CurrentAirPressure + i_AirToAdd <= r_MaximumAllowedAirPressure)
+                {
+                    CurrentAirPressure += i_AirToAdd;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(
+                        0,
+                        r_MaximumAllowedAirPressure - CurrentAirPressure,
+                        "Cannot add air beyond the maximum allowed pressure.");
+                }
+
+            }
+
+        }
+
         public readonly string r_ModelName;
         public readonly string r_LicenseID;
         protected Wheel[] m_Wheels;
@@ -42,42 +72,9 @@ namespace Ex03.GarageLogic
                 }
 
             }
-        }
-
-
-
-
-        protected class Wheel
-        {
-            public string m_ManufacturerName;
-            public readonly float r_MaximumAllowedAirPressure;
-            public float CurrentAirPressure { get; set; }
-
-
-
-            public Wheel(float i_MaximumAllowedAirPressure)
-            {
-                r_MaximumAllowedAirPressure = i_MaximumAllowedAirPressure;
-                CurrentAirPressure = 0;
-            }
-
-            public void AddAir(float i_AirToAdd)
-            {
-                if (CurrentAirPressure + i_AirToAdd <= r_MaximumAllowedAirPressure)
-                {
-                    CurrentAirPressure += i_AirToAdd;
-                }
-                else
-                {
-                    throw new ValueOutOfRangeException(
-                        0,
-                        r_MaximumAllowedAirPressure - CurrentAirPressure,
-                        "Cannot add air beyond the maximum allowed pressure.");
-                }
-
-            }
 
         }
+
         public void FillAirInTires()
         {
             foreach (Wheel wheel in m_Wheels)
@@ -94,6 +91,7 @@ namespace Ex03.GarageLogic
             {
                 fuelPoweredVehicle.Refuel(i_fuelType, i_fuelAmountToAdd);
             }
+
         }
 
         public void Recharge(float i_minutesToCharge)
@@ -102,6 +100,7 @@ namespace Ex03.GarageLogic
             {
                 fuelPoweredVehicle.Recharge(i_minutesToCharge);
             }
+
         }
 
         internal virtual Dictionary<string, string> GetAllDataForVehicle()
@@ -114,13 +113,13 @@ namespace Ex03.GarageLogic
                 VehicleData[$"Wheel #{i} Manufacturer"] = m_Wheels[i].m_ManufacturerName;
                 VehicleData[$"Wheel #{i} Air Pressure"] = m_Wheels[i].CurrentAirPressure.ToString();
             }
+
             return VehicleData;
         }
 
-        internal abstract float EnergySourcePrecentage { get; set; }
+        internal abstract float EnergySourcePercentage { get; set; }
 
         internal abstract void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData);
-
     }
 
 }

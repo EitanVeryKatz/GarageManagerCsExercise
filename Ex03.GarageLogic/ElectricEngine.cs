@@ -9,13 +9,14 @@ namespace Ex03.GarageLogic
     public class ElectricEngine
     {
         public float MaxMinutesOfUsage { get; set; }
+
         public float MinutesLeftInBattery { get; set; }
-        public ElectricEngine(float i_MaxBatteryHours)
+
+        public ElectricEngine(float i_MaxBatteryMinutes)
         {
-            MaxMinutesOfUsage = i_MaxBatteryHours;
+            MaxMinutesOfUsage = i_MaxBatteryMinutes;
             MinutesLeftInBattery = 0;
         }
-
 
         public void ChargeBattery(float i_AmountToAdd)
         {
@@ -28,5 +29,6 @@ namespace Ex03.GarageLogic
         }
 
     }
+
 }
 

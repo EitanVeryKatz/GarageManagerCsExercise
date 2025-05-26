@@ -8,9 +8,12 @@ namespace Ex03.GarageLogic
 {
     public class FuelEngine
     {
-        public float MaxFuelCapacity { get; set; }
-        public float CurrentFuelAmount { get; set; }
         public enum e_FuelTypes { Octan98, Octan96, Octan95, Soler }
+
+        public float MaxFuelCapacity { get; set; }
+
+        public float CurrentFuelAmount { get; set; }
+
         public e_FuelTypes FuelType { get; }
 
         public FuelEngine(e_FuelTypes i_FuelType, float i_MaxFuelCapacity)
@@ -41,5 +44,5 @@ namespace Ex03.GarageLogic
         }
 
     }
-}
 
+}

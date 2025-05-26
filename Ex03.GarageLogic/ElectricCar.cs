@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +8,11 @@ namespace Ex03.GarageLogic
 {
     public class ElectricCar : Car, IElectric
     {
-        private ElectricEngine m_engine = new ElectricEngine(4000000);
-        public ElectricCar(string i_LicenseID, string i_ModelName)
-            : base(i_ModelName, i_LicenseID)
+        private const float k_MaxBatteryCapacityMinutes = 4000000;
+
+        private ElectricEngine m_engine = new ElectricEngine(k_MaxBatteryCapacityMinutes);
+
+        public ElectricCar(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
         }
 
@@ -20,7 +21,7 @@ namespace Ex03.GarageLogic
             m_engine.ChargeBattery(i_minutesToCharge / 60);
         }
 
-        internal override float EnergySourcePrecentage
+        internal override float EnergySourcePercentage
         {
             get
             {
@@ -38,10 +39,11 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, string> vehicleData = base.GetAllDataForVehicle();
 
-            vehicleData["Battery Precentage"] = string.Format("{0}%", EnergySourcePrecentage);
+            vehicleData["Battery Percentage"] = string.Format("{0}%", EnergySourcePercentage);
 
             return vehicleData;
         }
 
     }
+
 }

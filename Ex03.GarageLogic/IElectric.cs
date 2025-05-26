@@ -10,4 +10,5 @@ namespace Ex03.GarageLogic
     {
         void Recharge(float i_minutesToCharge);
     }
+
 }

@@ -9,6 +9,7 @@ namespace Ex03.GarageLogic
     public class FuelMotorcycle : Motorcycle, IFuelPowered
     {
         private readonly FuelEngine m_engine = new FuelEngine(FuelEngine.e_FuelTypes.Octan98, 5.8f);
+
         public FuelMotorcycle(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
 
@@ -18,13 +19,12 @@ namespace Ex03.GarageLogic
         {
             m_engine.Refuel(i_fuelAmountToAdd, i_fuelType);
         }
-
         FuelEngine.e_FuelTypes IFuelPowered.GetFuelType()
         {
             return m_engine.FuelType;
         }
 
-        internal override float EnergySourcePrecentage
+        internal override float EnergySourcePercentage
         {
             get
             {
@@ -43,12 +43,10 @@ namespace Ex03.GarageLogic
             Dictionary<string, string> vehicleData = base.GetAllDataForVehicle();
 
             vehicleData["Fuel Type"] = m_engine.FuelType.ToString();
-            vehicleData["Fuel Tank Precentage"] = string.Format("{0}%", EnergySourcePrecentage);
+            vehicleData["Fuel Tank Precentage"] = string.Format("{0}%", EnergySourcePercentage);
 
             return vehicleData;
         }
-
-
 
     }
 

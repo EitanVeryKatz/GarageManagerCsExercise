@@ -14,10 +14,12 @@ namespace Ex03.GarageLogic
         private const float k_MaximunWheelAirPressure = 27;
 
         private readonly FuelEngine m_engine = new FuelEngine(FuelEngine.e_FuelTypes.Soler, 135);
+
         public bool HoldsDangerousMaterial { get; set; }
+
         public float CargoVolume { get; set; }
 
-        internal override float EnergySourcePrecentage
+        internal override float EnergySourcePercentage
         {
             get
             {
@@ -30,8 +32,7 @@ namespace Ex03.GarageLogic
             }
 
         }
-        public Truck(string i_LicenseID, string i_ModelName)
-            : base(i_ModelName, i_LicenseID)
+        public Truck(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
             base.m_Wheels = new Wheel[k_NumOfWheels];
 
@@ -50,6 +51,7 @@ namespace Ex03.GarageLogic
             {
                 return m_engine.CurrentFuelAmount;
             }
+
             private set
             {
                 m_engine.CurrentFuelAmount = value;
@@ -72,7 +74,7 @@ namespace Ex03.GarageLogic
             Dictionary<string, string> VehicleData = base.GetAllDataForVehicle();
 
             VehicleData["Fuel Type"] = "Soler";
-            VehicleData["Fuel Tank Precentage"] = string.Format("{0}%", EnergySourcePrecentage);
+            VehicleData["Fuel Tank Precentage"] = string.Format("{0}%", EnergySourcePercentage);
             VehicleData["Holds Dangerous Material"] = HoldsDangerousMaterial.ToString();
             VehicleData["Cargo Volume"] = CargoVolume.ToString();
 

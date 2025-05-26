@@ -10,8 +10,7 @@ namespace Ex03.GarageLogic
     {
         private FuelEngine m_engine = new FuelEngine(FuelEngine.e_FuelTypes.Octan98, 48);
 
-        public FuelCar(string i_LicenseID, string i_ModelName)
-            : base(i_ModelName, i_LicenseID)
+        public FuelCar(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
 
         }
@@ -62,18 +61,16 @@ namespace Ex03.GarageLogic
             return m_engine.FuelType;
         }
 
-        internal override float EnergySourcePrecentage
+        internal override float EnergySourcePercentage
         {
             get
             {
-
                 return (m_engine.CurrentFuelAmount / m_engine.MaxFuelCapacity) * 100;
             }
             set
             {
                 m_engine.CurrentFuelAmount = (value / 100) * m_engine.MaxFuelCapacity;
             }
-
 
         }
 
@@ -82,7 +79,7 @@ namespace Ex03.GarageLogic
             Dictionary<string, string> vehicleData = base.GetAllDataForVehicle();
 
             vehicleData["Fuel Type"] = m_engine.FuelType.ToString();
-            vehicleData["Fuel Tank Precentage"] = string.Format("{0}%", EnergySourcePrecentage);
+            vehicleData["Fuel Tank Precentage"] = string.Format("{0}%", EnergySourcePercentage);
 
             return vehicleData;
         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
 namespace Ex03.GarageLogic
 {
     public interface IFuelPowered
@@ -12,4 +11,5 @@ namespace Ex03.GarageLogic
 
         FuelEngine.e_FuelTypes GetFuelType();
     }
+
 }

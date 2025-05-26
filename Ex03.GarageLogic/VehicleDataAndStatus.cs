@@ -12,15 +12,20 @@ namespace Ex03.GarageLogic
         private readonly Vehicle r_vehicle;
 
         private e_StatusOfVehicleInGarage m_status = e_StatusOfVehicleInGarage.WorkInProgress;
+
         public string OwnerName { get; private set; }
+
         public string OwnerPhoneNumber { get; private set; }
+
         public string LicenseId
         {
             get
             {
                 return r_vehicle.r_LicenseID;
             }
+
         }
+
         public e_StatusOfVehicleInGarage StatusOfVehicleInGarage
         {
             get
@@ -40,6 +45,7 @@ namespace Ex03.GarageLogic
             {
                 return r_vehicle.TireCount;
             }
+
         }
 
         public string[] UniqueDataMembers
@@ -48,12 +54,13 @@ namespace Ex03.GarageLogic
             {
                 string[] dataMembers = new string[r_vehicle.uniqueDataMembers.Count];
                 r_vehicle.uniqueDataMembers.CopyTo(dataMembers);
+
                 return dataMembers;
             }
+
         }
 
         public VehicleDataAndStatus(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentFuelAmount = 0)
-
         {
             r_vehicle = CreateVehicle(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone, i_CurrentFuelAmount);
             OwnerName = i_OwnerName;
@@ -62,6 +69,7 @@ namespace Ex03.GarageLogic
             {
                 fuelPoweredVehicle.Refuel(fuelPoweredVehicle.GetFuelType(), i_CurrentFuelAmount);
             }
+
         }
 
         public e_StatusOfVehicleInGarage Status
@@ -103,6 +111,7 @@ namespace Ex03.GarageLogic
             VehicleData["Owner Name"] = OwnerName;
             VehicleData["Owner Phone"] = OwnerPhoneNumber;
             VehicleData["Status"] = m_status.ToString();
+
             return VehicleData;
         }
 
@@ -113,8 +122,9 @@ namespace Ex03.GarageLogic
 
         internal void SetEnergyPrecentage(float i_newEnergyPrecentage)
         {
-            r_vehicle.EnergySourcePrecentage = i_newEnergyPrecentage;
+            r_vehicle.EnergySourcePercentage = i_newEnergyPrecentage;
         }
+
     }
 
 }

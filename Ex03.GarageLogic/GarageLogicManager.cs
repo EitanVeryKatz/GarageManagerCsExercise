@@ -10,11 +10,17 @@ namespace Ex03.GarageLogic
 {
     public class GarageLogicManager
     {
+        public enum e_StatusOfVehicleInGarage
+        {
+            WorkInProgress,
+            WorkFinished,
+            Paid
+        }
+
         private readonly Dictionary<string, VehicleDataAndStatus> m_vehicles = new Dictionary<string, VehicleDataAndStatus>();
 
         public void AddNewVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentFuelAmount = 0)
         {
-
             VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone, i_CurrentFuelAmount);
             m_vehicles.Add(newVehicle.LicenseId, newVehicle);
         }
@@ -23,6 +29,7 @@ namespace Ex03.GarageLogic
         {
             m_vehicles[i_licenseID].SetTireInfo(wheelData);
         }
+
         public void ChangeVehicleStatus(string i_licanseIdOfVehicle, e_StatusOfVehicleInGarage i_newStatus)
         {
             m_vehicles[i_licanseIdOfVehicle].Status = i_newStatus;
@@ -32,6 +39,7 @@ namespace Ex03.GarageLogic
         {
             return m_vehicles[i_vehicleId].TireCount;
         }
+
         public List<string> GetAllLicanseNumbersOfVehiclesInGarage()
         {
             return m_vehicles.Keys.ToList();
@@ -99,19 +107,13 @@ namespace Ex03.GarageLogic
                 default:
                     throw new ArgumentException();
             }
+
             m_vehicles[i_vehicleId].Refuel(fuelType, i_fuelAmountToAdd);
         }
 
         public bool IsVehicleInGarage(string i_vehicleId)
         {
             return m_vehicles.ContainsKey(i_vehicleId);
-        }
-
-        public enum e_StatusOfVehicleInGarage
-        {
-            WorkInProgress,
-            WorkFinished,
-            Paid
         }
 
         public void RechargeVehicle(string i_vehicleId, float i_minutesToCharge)
@@ -177,6 +179,7 @@ namespace Ex03.GarageLogic
                 SetUniqueMembers(LicenceId, FilledUniqueData);
 
             }
+
         }
 
     }
