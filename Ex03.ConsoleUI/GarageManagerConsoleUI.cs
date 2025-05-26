@@ -254,6 +254,10 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine($"Invalid fuel type: {fuelChoice}");
                 }
+                catch (ValueOutOfRangeException exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
             }
             else
             {
@@ -268,8 +272,16 @@ namespace Ex03.ConsoleUI
             float minutesToRecharge = getValidatedFloatInput("Please enter amount to recharge:");
             if (r_garageLogic.IsVehicleInGarage(licenseIdToRecharge))
             {
-                r_garageLogic.RechargeVehicle(licenseIdToRecharge, minutesToRecharge);
-                Console.WriteLine("Vehicle recharged.");
+                try
+                {
+                    r_garageLogic.RechargeVehicle(licenseIdToRecharge, minutesToRecharge);
+                    Console.WriteLine("Vehicle recharged.");
+                }
+                catch (ValueOutOfRangeException exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
+
             }
             else
             {
