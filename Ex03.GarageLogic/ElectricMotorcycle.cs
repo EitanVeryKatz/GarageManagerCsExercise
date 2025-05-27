@@ -1,34 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
     public class ElectricMotorcycle : Motorcycle
     {
-        ElectricEngine m_Engine = new ElectricEngine(1);
+        private const float k_MaxBatteryCapacityMinutes = 192;
+        ElectricEngine r_engine = new ElectricEngine(k_MaxBatteryCapacityMinutes);
 
-        public ElectricMotorcycle(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
+        public ElectricMotorcycle(string i_licenseID, string i_modelName) : base(i_modelName, i_licenseID)
         {
 
         }
 
-        void Recharge(float i_minutesToCharge)
+        private void Recharge(float i_minutesToCharge)
         {
-            m_Engine.ChargeBattery(i_minutesToCharge / 60);
+            r_engine.ChargeBattery(i_minutesToCharge / 60);
         }
 
         internal override float EnergySourcePercentage
         {
             get
             {
-                return (m_Engine.MinutesLeftInBattery / m_Engine.MaxMinutesOfUsage) * 100;
+                return (r_engine.MinutesLeftInBattery / r_engine.MaxMinutesOfUsage) * 100;
             }
             set
             {
-                m_Engine.MinutesLeftInBattery = (value / 100) * m_Engine.MaxMinutesOfUsage;
+                r_engine.MinutesLeftInBattery = (value / 100) * r_engine.MaxMinutesOfUsage;
             }
 
         }
@@ -48,7 +46,8 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException("Error: tried to add fuel to electric vehicle");
             }
-            m_Engine.ChargeBattery(i_EnergySourceAmountToAdd);
+
+            r_engine.ChargeBattery(i_EnergySourceAmountToAdd);
         }
 
     }

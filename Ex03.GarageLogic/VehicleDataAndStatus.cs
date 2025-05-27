@@ -1,27 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace Ex03.GarageLogic
 {
     public class VehicleDataAndStatus : VehicleCreator
     {
         private readonly Vehicle r_vehicle;
-
         private eVehicleStatuses m_status = eVehicleStatuses.WorkInProgress;
-
         public string OwnerName { get; private set; }
-
         public string OwnerPhoneNumber { get; private set; }
-
         public string LicenseId
         {
             get
             {
                 return r_vehicle.r_LicenseID;
+            }
+
+        }
+
+        public eVehicleStatuses Status
+        {
+            get
+            {
+                return m_status;
+            }
+            set
+            {
+                m_status = value;
             }
 
         }
@@ -52,32 +57,19 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                string[] dataMembers = new string[r_vehicle.UniqueDataMembers.Count];
-                r_vehicle.UniqueDataMembers.CopyTo(dataMembers);
+                string[] dataMembers = new string[r_vehicle.m_uniqueDataMembers.Count];
+                r_vehicle.m_uniqueDataMembers.CopyTo(dataMembers);
 
                 return dataMembers;
             }
 
         }
 
-        public VehicleDataAndStatus(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone)
+        public VehicleDataAndStatus(string i_vehicleType, string i_licenseID, string i_modelName, string i_ownerName, string i_ownerPhone)
         {
-            r_vehicle = CreateVehicle(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone);
-            OwnerName = i_OwnerName;
-            OwnerPhoneNumber = i_OwnerPhone;
-        }
-
-        public eVehicleStatuses Status
-        {
-            get
-            {
-                return m_status;
-            }
-            set
-            {
-                m_status = value;
-            }
-
+            r_vehicle = CreateVehicle(i_vehicleType, i_licenseID, i_modelName, i_ownerName, i_ownerPhone);
+            OwnerName = i_ownerName;
+            OwnerPhoneNumber = i_ownerPhone;
         }
 
         public void FillAirInAllTiresOfVehicle()
@@ -103,6 +95,7 @@ namespace Ex03.GarageLogic
         internal Dictionary<string, string> GetAllDataForVehicle()
         {
             Dictionary<string, string> VehicleData = r_vehicle.GetAllDataForVehicle();
+
             VehicleData["Owner Name"] = OwnerName;
             VehicleData["Owner Phone"] = OwnerPhoneNumber;
             VehicleData["Status"] = m_status.ToString();
@@ -110,9 +103,9 @@ namespace Ex03.GarageLogic
             return VehicleData;
         }
 
-        internal void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
+        internal void SetUniqueMembers(Dictionary<string, string> i_filledUniqueData)
         {
-            r_vehicle.SetUniqueMembers(i_FilledUniqueData);
+            r_vehicle.SetUniqueMembers(i_filledUniqueData);
         }
 
         internal void SetEnergyPrecentage(float i_newEnergyPrecentage)
@@ -121,6 +114,7 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentOutOfRangeException("Energy source precentage must be in the range 0 - 100.");
             }
+
             r_vehicle.EnergySourcePercentage = i_newEnergyPrecentage;
         }
 

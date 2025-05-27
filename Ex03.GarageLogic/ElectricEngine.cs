@@ -1,31 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
-    public class ElectricEngine
+    internal class ElectricEngine
     {
         public float MaxMinutesOfUsage { get; set; }
 
         public float MinutesLeftInBattery { get; set; }
 
-        public ElectricEngine(float i_MaxBatteryMinutes)
+        public ElectricEngine(float i_maxBatteryMinutes)
         {
-            MaxMinutesOfUsage = i_MaxBatteryMinutes;
+            MaxMinutesOfUsage = i_maxBatteryMinutes;
             MinutesLeftInBattery = 0;
         }
 
-        public void ChargeBattery(float i_AmountToAdd)
+        public void ChargeBattery(float i_amountToAdd)
         {
-            if (MinutesLeftInBattery + i_AmountToAdd > MaxMinutesOfUsage)
+            if (MinutesLeftInBattery + i_amountToAdd > MaxMinutesOfUsage)
             {
                 throw new ValueOutOfRangeException(0, MaxMinutesOfUsage - MinutesLeftInBattery);
             }
 
-            MinutesLeftInBattery += i_AmountToAdd;
+            MinutesLeftInBattery += i_amountToAdd;
         }
 
     }

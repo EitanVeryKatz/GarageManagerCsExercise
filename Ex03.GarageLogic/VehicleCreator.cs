@@ -10,26 +10,26 @@ namespace Ex03.GarageLogic
             get { return new List<string> { "FuelCar", "ElectricCar", "FuelMotorcycle", "ElectricMotorcycle", "Truck" }; }
         }
 
-        public  Vehicle CreateVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentFuelAmount = 0)
+        public  Vehicle CreateVehicle(string i_vehicleType, string i_licenseID, string i_modelName, string i_ownerName, string i_ownerPhone, float i_CurrentFuelAmount = 0)
         {
             Vehicle newVehicle = null;
 
-            switch (i_VehicleType)
+            switch (i_vehicleType)
             {
                 case "FuelCar":
-                    newVehicle = new FuelCar(i_LicenseID, i_ModelName);
+                    newVehicle = new FuelCar(i_licenseID, i_modelName);
                     break;
                 case "ElectricCar":
-                    newVehicle = new ElectricCar(i_LicenseID, i_ModelName);
+                    newVehicle = new ElectricCar(i_licenseID, i_modelName);
                     break;
                 case "FuelMotorcycle":
-                    newVehicle = new FuelMotorcycle(i_LicenseID, i_ModelName);
+                    newVehicle = new FuelMotorcycle(i_licenseID, i_modelName);
                     break;
                 case "ElectricMotorcycle":
-                    newVehicle = new ElectricMotorcycle(i_LicenseID, i_ModelName);
+                    newVehicle = new ElectricMotorcycle(i_licenseID, i_modelName);
                     break;
                 case "Truck":
-                    newVehicle = new Truck(i_LicenseID, i_ModelName);
+                    newVehicle = new Truck(i_licenseID, i_modelName);
                     break;
                 default:
                     throw new ArgumentException();

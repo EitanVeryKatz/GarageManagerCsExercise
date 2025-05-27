@@ -1,70 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
     public class FuelCar : Car
     {
-        private FuelEngine m_Engine = new FuelEngine(Vehicle.eFuelTypes.Octan98, 48);
+        private readonly FuelEngine r_engine = new FuelEngine(Vehicle.eFuelTypes.Octan98, 48);
 
-        public FuelCar(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
+        public FuelCar(string i_licenseID, string i_modelName) : base(i_modelName, i_licenseID)
         {
 
         }
 
-        public void Refuel(float i_AmountToAdd, Vehicle.eFuelTypes i_FuelType)
+        public void Refuel(float i_amountToAdd, Vehicle.eFuelTypes i_fuelType)
         {
-            if (i_FuelType != m_Engine.FuelType)
+            if (i_fuelType != r_engine.FuelType)
             {
                 throw new ArgumentException("Fuel type does not match the car's required fuel type.");
             }
 
-            if (i_AmountToAdd <= 0)
+            if (i_amountToAdd <= 0)
             {
                 throw new ArgumentException("Amount to add must be positive.");
             }
 
-            if (m_Engine.CurrentFuelAmount + i_AmountToAdd > m_Engine.MaxFuelCapacity)
+            if (r_engine.CurrentFuelAmount + i_amountToAdd > r_engine.MaxFuelCapacity)
             {
-                throw new ValueOutOfRangeException(0, m_Engine.MaxFuelCapacity - m_Engine.CurrentFuelAmount, "Fuel amount exceeds tank capacity.");
+                throw new ValueOutOfRangeException(0, r_engine.MaxFuelCapacity - r_engine.CurrentFuelAmount, "Fuel amount exceeds tank capacity.");
             }
 
-            m_Engine.Refuel(i_AmountToAdd, i_FuelType);
-            m_Engine.CurrentFuelAmount += i_AmountToAdd;
+            r_engine.Refuel(i_amountToAdd, i_fuelType);
+            r_engine.CurrentFuelAmount += i_amountToAdd;
         }
 
         public Vehicle.eFuelTypes FuelType
         {
-            get { return m_Engine.FuelType; }
+            get { return r_engine.FuelType; }
         }
 
         public float CurrentFuelAmount
         {
-            get { return m_Engine.CurrentFuelAmount; }
+            get { return r_engine.CurrentFuelAmount; }
         }
 
         public float MaxFuelCapacity
         {
-            get { return m_Engine.MaxFuelCapacity; }
+            get { return r_engine.MaxFuelCapacity; }
         }
 
         internal override Vehicle.eFuelTypes GetFuelType()
         {
-            return m_Engine.FuelType;
+            return r_engine.FuelType;
         }
 
         internal override float EnergySourcePercentage
         {
             get
             {
-                return (m_Engine.CurrentFuelAmount / m_Engine.MaxFuelCapacity) * 100;
+                return (r_engine.CurrentFuelAmount / r_engine.MaxFuelCapacity) * 100;
             }
             set
             {
-                m_Engine.CurrentFuelAmount = (value / 100) * m_Engine.MaxFuelCapacity;
+                r_engine.CurrentFuelAmount = (value / 100) * r_engine.MaxFuelCapacity;
             }
 
         }
@@ -73,15 +70,15 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, string> vehicleData = base.GetAllDataForVehicle();
 
-            vehicleData["Fuel Type"] = m_Engine.FuelType.ToString();
+            vehicleData["Fuel Type"] = r_engine.FuelType.ToString();
             vehicleData["Fuel Tank Precentage"] = string.Format("{0}%", EnergySourcePercentage);
 
             return vehicleData;
         }
 
-        public override void AddToEnergySource(float i_EnergySourceAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.None)
+        public override void AddToEnergySource(float i_energySourceAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.None)
         {
-            m_Engine.Refuel(i_EnergySourceAmountToAdd, i_fuelType);
+            r_engine.Refuel(i_energySourceAmountToAdd, i_fuelType);
         }
 
     }
