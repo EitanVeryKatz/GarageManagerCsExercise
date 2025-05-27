@@ -60,15 +60,11 @@ namespace Ex03.GarageLogic
 
         }
 
-        public VehicleDataAndStatus(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentFuelAmount = 0)
+        public VehicleDataAndStatus(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_currentEnergySourcePrecentage = 0)
         {
-            r_vehicle = CreateVehicle(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone, i_CurrentFuelAmount);
+            r_vehicle = CreateVehicle(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone);
             OwnerName = i_OwnerName;
             OwnerPhoneNumber = i_OwnerPhone;
-            if(i_CurrentFuelAmount > 0) {
-                Refuel(r_vehicle.GetFuelType(), i_CurrentFuelAmount);
-            }
-            
         }
 
         public eVehicleStatuses Status

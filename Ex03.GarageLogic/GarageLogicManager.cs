@@ -13,9 +13,10 @@ namespace Ex03.GarageLogic
 
         private readonly Dictionary<string, VehicleDataAndStatus> m_Vehicles = new Dictionary<string, VehicleDataAndStatus>();
 
-        public void AddNewVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentFuelAmount = 0)
+        public void AddNewVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_currentEnergySourcePrecentage = 0)
         {
-            VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone, i_CurrentFuelAmount);
+            VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone, i_currentEnergySourcePrecentage);
+           newVehicle.SetEnergyPrecentage(i_currentEnergySourcePrecentage);
             m_Vehicles.Add(newVehicle.LicenseId, newVehicle);
         }
 
@@ -41,17 +42,23 @@ namespace Ex03.GarageLogic
 
         public List<string> GetAllLicanseNumbersOfVehiclesInGarage(string i_statusStr)
         {
-            VehicleDataAndStatus.eVehicleStatuses status;
+            
             List<string> resaultList = new List<string>();
+            if (Enum.TryParse<VehicleDataAndStatus.eVehicleStatuses>(i_statusStr, out VehicleDataAndStatus.eVehicleStatuses o_status)) {
 
-            status = (VehicleDataAndStatus.eVehicleStatuses)Enum.Parse(typeof(VehicleDataAndStatus.eVehicleStatuses), i_statusStr);
-            foreach (string licanceId in m_Vehicles.Keys)
-            {
-                if (m_Vehicles[licanceId].Status == status)
+                foreach (string licanceId in m_Vehicles.Keys)
                 {
-                    resaultList.Add(licanceId);
-                }
+                    if (m_Vehicles[licanceId].Status == o_status)
+                    {
+                        resaultList.Add(licanceId);
+                    }
 
+                } 
+
+            }
+            else
+            {
+                throw new ArgumentException();
             }
 
             return resaultList;

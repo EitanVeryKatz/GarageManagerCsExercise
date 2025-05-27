@@ -10,7 +10,7 @@ namespace Ex03.ConsoleUI
     internal class GarageManagerConsoleUI
     {
         private GarageLogicManager r_garageLogic = new GarageLogicManager();
-        private readonly string[] r_ValidStatusArr = {"WorkInProggres","WorkFinished","Paid"};
+        private readonly string[] r_ValidStatusArr = {"WorkInProgress","WorkFinished","Paid"};
 
         public void PrintMenu()
         {
@@ -94,39 +94,31 @@ namespace Ex03.ConsoleUI
                 string vehicleType = Console.ReadLine();
 
 
-                float currentFuelAmount = getValidatedFloatInput("Please enter CurrentFuelAmount (or 0 if not applicable):");
-                float currentMinutesLeftInBattery = getValidatedFloatInput("Please enter CurrentFuelAmount (or 0 if not applicable):");
+                float currentEnergySourcePrecentage = getValidatedFloatInput("Please enter Current Fuel/Battery Precentage");
 
-                if (!isValidInput(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount))
+
+                if (!isValidInput(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentEnergySourcePrecentage))
                 {
                     Console.WriteLine("Invalid input. Vehicle not added.");
                     return;
                 }
 
-                r_garageLogic.AddNewVehicle(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentFuelAmount);
-                if (currentMinutesLeftInBattery > 0)
+                try
                 {
-                    try
-                    {
-                        if (currentMinutesLeftInBattery > 0)
-                        {
-                            r_garageLogic.RechargeVehicle(licenseID, currentMinutesLeftInBattery);
-                        }
-                           
-                        string[,] wheelData = collectWheelData(licenseID);
-                        r_garageLogic.UpdateTireInfoForNewVehicle(licenseID, wheelData);
+                    r_garageLogic.AddNewVehicle(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentEnergySourcePrecentage);
+                    string[,] wheelData = collectWheelData(licenseID);
+                    r_garageLogic.UpdateTireInfoForNewVehicle(licenseID, wheelData);
 
-                        Dictionary<string, string> uniqueData = collectUniqueData(licenseID);
-                        r_garageLogic.SetUniqueMembers(licenseID, uniqueData);
+                    Dictionary<string, string> uniqueData = collectUniqueData(licenseID);
+                    r_garageLogic.SetUniqueMembers(licenseID, uniqueData);
 
-                        Console.WriteLine("Vehicle added to garage.");
-                    }
-                    catch(Exception)
-                    {
-                        Console.WriteLine("Invalid input. Vehicle not added.");
-                    }
+                    Console.WriteLine("Vehicle added to garage.");
                 }
-                
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid input. Vehicle not added.");
+                }
+
             }
         }
 
@@ -234,8 +226,15 @@ namespace Ex03.ConsoleUI
             string statusInputStr = Console.ReadLine();
             if (isValidStatus(statusInputStr))
             {
-                r_garageLogic.ChangeVehicleStatus(licenseId,statusInputStr);
-                Console.WriteLine("Vehicle status updated.");
+                try
+                {
+                    r_garageLogic.ChangeVehicleStatus(licenseId, statusInputStr);
+                    Console.WriteLine("Vehicle status updated.");
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine("Status not  currently supported");
+                }
             }
             else
             {
