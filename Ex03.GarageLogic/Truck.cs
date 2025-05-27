@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
         private const int k_NumOfWheels = 12;
         private const float k_MaximunWheelAirPressure = 27;
 
-        private readonly FuelEngine r_engine = new FuelEngine(Vehicle.eFuelTypes.Soler, 135);
+        private readonly FuelEngine r_Engine = new FuelEngine(Vehicle.eFuelTypes.Soler, 135);
 
         public bool HoldsDangerousMaterial { get; set; }
 
@@ -18,23 +18,23 @@ namespace Ex03.GarageLogic
             get
             {
 
-                return (r_engine.CurrentFuelAmount / r_engine.MaxFuelCapacity) * 100;
+                return (r_Engine.CurrentFuelAmount / r_Engine.MaxFuelCapacity) * 100;
             }
             set
             {
-                r_engine.CurrentFuelAmount = (value / 100) * r_engine.MaxFuelCapacity;
+                r_Engine.CurrentFuelAmount = (value / 100) * r_Engine.MaxFuelCapacity;
             }
 
         }
 
-        public Truck(string i_licenseID, string i_modelName) : base(i_modelName, i_licenseID)
+        public Truck(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
-            m_uniqueDataMembers.Add("Holds Dangerous Material");
-            m_uniqueDataMembers.Add("Cargo Volume");
-            base.m_wheels = new Wheel[k_NumOfWheels];
+            m_UniqueDataMembers.Add("Holds Dangerous Material");
+            m_UniqueDataMembers.Add("Cargo Volume");
+            base.m_Wheels = new Wheel[k_NumOfWheels];
             for (int i = 0; i < k_NumOfWheels; i++)
             {
-                m_wheels[i] = new Wheel(k_MaximunWheelAirPressure);
+                m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);
             }
 
         }
@@ -43,18 +43,18 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_engine.CurrentFuelAmount;
+                return r_Engine.CurrentFuelAmount;
             }
             private set
             {
-                r_engine.CurrentFuelAmount = value;
+                r_Engine.CurrentFuelAmount = value;
             }
 
         }
 
         internal override Vehicle.eFuelTypes GetFuelType()
         {
-            return r_engine.FuelType;
+            return r_Engine.FuelType;
         }
 
         internal override Dictionary<string, string> GetAllDataForVehicle()
@@ -69,15 +69,15 @@ namespace Ex03.GarageLogic
             return VehicleData;
         }
 
-        internal override void SetUniqueMembers(Dictionary<string, string> i_filledUniqueData)
+        internal override void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
         {
-            CargoVolume = float.Parse(i_filledUniqueData["Cargo Volume"]);
-            HoldsDangerousMaterial = bool.Parse(i_filledUniqueData["Holds Dangerous Material"]);
+            CargoVolume = float.Parse(i_FilledUniqueData["Cargo Volume"]);
+            HoldsDangerousMaterial = bool.Parse(i_FilledUniqueData["Holds Dangerous Material"]);
         }
 
-        public override void AddToEnergySource(float i_energySourceAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.None)
+        public override void AddToEnergySource(float i_EnergySourceAmountToAdd, eFuelTypes i_FuelType = eFuelTypes.None)
         {
-            r_engine.Refuel(i_energySourceAmountToAdd, i_fuelType);
+            r_Engine.Refuel(i_EnergySourceAmountToAdd, i_FuelType);
         }
 
     }

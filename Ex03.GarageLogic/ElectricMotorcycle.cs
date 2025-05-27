@@ -6,27 +6,22 @@ namespace Ex03.GarageLogic
     public class ElectricMotorcycle : Motorcycle
     {
         private const float k_MaxBatteryCapacityMinutes = 192;
-        ElectricEngine r_engine = new ElectricEngine(k_MaxBatteryCapacityMinutes);
+        ElectricEngine r_Engine = new ElectricEngine(k_MaxBatteryCapacityMinutes);
 
-        public ElectricMotorcycle(string i_licenseID, string i_modelName) : base(i_modelName, i_licenseID)
+        public ElectricMotorcycle(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
 
-        }
-
-        private void Recharge(float i_minutesToCharge)
-        {
-            r_engine.ChargeBattery(i_minutesToCharge / 60);
         }
 
         internal override float EnergySourcePercentage
         {
             get
             {
-                return (r_engine.MinutesLeftInBattery / r_engine.MaxMinutesOfUsage) * 100;
+                return (r_Engine.MinutesLeftInBattery / r_Engine.MaxMinutesOfUsage) * 100;
             }
             set
             {
-                r_engine.MinutesLeftInBattery = (value / 100) * r_engine.MaxMinutesOfUsage;
+                r_Engine.MinutesLeftInBattery = (value / 100) * r_Engine.MaxMinutesOfUsage;
             }
 
         }
@@ -40,14 +35,14 @@ namespace Ex03.GarageLogic
             return vehicleData;
         }
 
-        public override void AddToEnergySource(float i_EnergySourceAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.None)
+        public override void AddToEnergySource(float i_EnergySourceAmountToAdd, eFuelTypes i_FuelType = eFuelTypes.None)
         {
-            if (i_fuelType != eFuelTypes.None)
+            if (i_FuelType != eFuelTypes.None)
             {
                 throw new ArgumentException("Error: tried to add fuel to electric vehicle");
             }
 
-            r_engine.ChargeBattery(i_EnergySourceAmountToAdd);
+            r_Engine.ChargeBattery(i_EnergySourceAmountToAdd);
         }
 
     }

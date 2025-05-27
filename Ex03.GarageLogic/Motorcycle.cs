@@ -23,16 +23,16 @@ namespace Ex03.GarageLogic
 
         public int EngineVolume { get; set; }
 
-        public Motorcycle(string i_modelName, string i_licenseID) : base(i_modelName, i_licenseID)
+        public Motorcycle(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
         {
-            base.m_wheels = new Wheel[k_NumOfWheels];
+            base.m_Wheels = new Wheel[k_NumOfWheels];
             for (int i = 0; i < k_NumOfWheels; i++)
             {
-                m_wheels[i] = new Wheel(k_MaximunWheelAirPressure);
+                m_Wheels[i] = new Wheel(k_MaximunWheelAirPressure);
             }
 
-            m_uniqueDataMembers.Add("License Type");
-            m_uniqueDataMembers.Add("Engine Volume");
+            m_UniqueDataMembers.Add("License Type");
+            m_UniqueDataMembers.Add("Engine Volume");
         }
 
         internal override Dictionary<string, string> GetAllDataForVehicle()
@@ -45,10 +45,10 @@ namespace Ex03.GarageLogic
             return vehicleData;
         }
 
-        internal override void SetUniqueMembers(Dictionary<string, string> i_filledUniqueData)
+        internal override void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
         {
-            License = (eMotorcycleLicenseTypes)Enum.Parse(typeof(eMotorcycleLicenseTypes), i_filledUniqueData["License Type"]);
-            EngineVolume = int.Parse(i_filledUniqueData["Engine Volume"]);
+            License = (eMotorcycleLicenseTypes)Enum.Parse(typeof(eMotorcycleLicenseTypes), i_FilledUniqueData["License Type"]);
+            EngineVolume = int.Parse(i_FilledUniqueData["Engine Volume"]);
             if (EngineVolume < 0)
             {
                 throw new ValueOutOfRangeException(0);

@@ -8,14 +8,9 @@ namespace Ex03.GarageLogic
         private const float k_MaxBatteryCapacityMinutes = 288;
         private readonly ElectricEngine r_Engine = new ElectricEngine(k_MaxBatteryCapacityMinutes);
 
-        public ElectricCar(string i_licenseID, string i_modelName) : base(i_modelName, i_licenseID)
+        public ElectricCar(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
 
-        }
-
-        void Recharge(float i_minutesToCharge)
-        {
-            r_Engine.ChargeBattery(i_minutesToCharge / 60);
         }
 
         internal override float EnergySourcePercentage
@@ -41,14 +36,14 @@ namespace Ex03.GarageLogic
             return vehicleData;
         }
 
-        public override void AddToEnergySource(float i_energySourceAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.None)
+        public override void AddToEnergySource(float i_EnergySourceAmountToAdd, eFuelTypes i_FuelType = eFuelTypes.None)
         {
-            if(i_fuelType != eFuelTypes.None)
+            if(i_FuelType != eFuelTypes.None)
             {
                 throw new ArgumentException("Error: tried to add fuel to electric vehicle");
             }
 
-            r_Engine.ChargeBattery(i_energySourceAmountToAdd);
+            r_Engine.ChargeBattery(i_EnergySourceAmountToAdd);
         }
 
     }

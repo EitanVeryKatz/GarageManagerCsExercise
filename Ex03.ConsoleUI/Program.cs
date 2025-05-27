@@ -2,9 +2,9 @@
 {
     internal class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            GarageManagerConsoleUI garageManagerConsoleUI = new GarageManagerConsoleUI();
+            GarageManagerConsoleUI  garageManagerConsoleUI = new GarageManagerConsoleUI();
 
             while (garageManagerConsoleUI.Running)
             {

@@ -7,34 +7,34 @@ namespace Ex03.GarageLogic
 {
     public class GarageLogicManager
     {
-        private readonly Dictionary<string, VehicleDataAndStatus> r_vehicles = new Dictionary<string, VehicleDataAndStatus>();
+        private readonly Dictionary<string, VehicleDataAndStatus> r_Vehicles = new Dictionary<string, VehicleDataAndStatus>();
 
-        public void AddNewVehicle(string i_vehicleType, string i_licenseID, string i_modelName, string i_ownerName, string i_ownerPhone, float i_currentEnergySourcePrecentage = 0)
+        public void AddNewVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentEnergySourcePrecentage = 0)
         {
-            VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_vehicleType, i_licenseID, i_modelName, i_ownerName, i_ownerPhone);
+            VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone);
 
-            newVehicle.SetEnergyPrecentage(i_currentEnergySourcePrecentage);
-            r_vehicles.Add(newVehicle.LicenseId, newVehicle);
+            newVehicle.SetEnergyPrecentage(i_CurrentEnergySourcePrecentage);
+            r_Vehicles.Add(newVehicle.LicenseId, newVehicle);
         }
 
-        public void UpdateTireInfoForNewVehicle(string i_licenseID, string[,] wheelData)
+        public void UpdateTireInfoForNewVehicle(string i_LicenseID, string[,] i_WheelData)
         {
-            r_vehicles[i_licenseID].SetTireInfo(wheelData);
+            r_Vehicles[i_LicenseID].SetTireInfo(i_WheelData);
         }
 
-        public void ChangeVehicleStatus(string i_licanseID, string i_newStatus ="WorkInProgress")
+        public void ChangeVehicleStatus(string i_LicenseID, string i_newStatus ="WorkInProgress")
         {
-            r_vehicles[i_licanseID].Status = (VehicleDataAndStatus.eVehicleStatuses)Enum.Parse(typeof(VehicleDataAndStatus.eVehicleStatuses),i_newStatus);
+            r_Vehicles[i_LicenseID].Status = (VehicleDataAndStatus.eVehicleStatuses)Enum.Parse(typeof(VehicleDataAndStatus.eVehicleStatuses),i_newStatus);
         }
 
-        public int GetAmountOfTires(string i_licenseID)
+        public int GetAmountOfTires(string i_LicenseID)
         {
-            return r_vehicles[i_licenseID].TireCount;
+            return r_Vehicles[i_LicenseID].TireCount;
         }
 
         public List<string> GetAllLicanseNumbersOfVehiclesInGarage()
         {
-            return r_vehicles.Keys.ToList();
+            return r_Vehicles.Keys.ToList();
         }
 
         public List<string> GetAllLicanseNumbersOfVehiclesInGarage(string i_statusStr)
@@ -44,9 +44,9 @@ namespace Ex03.GarageLogic
 
             if (Enum.TryParse<VehicleDataAndStatus.eVehicleStatuses>(i_statusStr, out VehicleDataAndStatus.eVehicleStatuses o_status)) 
             {
-                foreach (string licanceId in r_vehicles.Keys)
+                foreach (string licanceId in r_Vehicles.Keys)
                 {
-                    if (r_vehicles[licanceId].Status == o_status)
+                    if (r_Vehicles[licanceId].Status == o_status)
                     {
                         resaultList.Add(licanceId);
                     }
@@ -62,51 +62,51 @@ namespace Ex03.GarageLogic
             return resaultList;
         }
 
-        public void FillAirInVehicle(string i_licanseID)
+        public void FillAirInVehicle(string i_LicenseID)
         {
-            r_vehicles[i_licanseID].FillAirInAllTiresOfVehicle();
+            r_Vehicles[i_LicenseID].FillAirInAllTiresOfVehicle();
         }
 
-        public string[] GetUniqueDataMembersOfVehicle(string i_licenseID)
+        public string[] GetUniqueDataMembersOfVehicle(string i_LicenseID)
         {
-            return r_vehicles[i_licenseID].UniqueDataMembers;
+            return r_Vehicles[i_LicenseID].UniqueDataMembers;
         }
 
-        public void RefuelVehicle(string i_licenseID, string i_fuelTypeStr, float i_fuelAmountToAdd)
+        public void RefuelVehicle(string i_LicenseID, string i_FuelTypeStr, float i_FuelAmountToAdd)
         {
-            bool isValidFuelType = Enum.TryParse<Vehicle.eFuelTypes>(i_fuelTypeStr,out Vehicle.eFuelTypes fuelType);
+            bool isValidFuelType = Enum.TryParse<Vehicle.eFuelTypes>(i_FuelTypeStr,out Vehicle.eFuelTypes o_FuelType);
 
             if (isValidFuelType == false)
             {
                 throw new ArgumentException();
             }
                     
-            r_vehicles[i_licenseID].Refuel(fuelType, i_fuelAmountToAdd);
+            r_Vehicles[i_LicenseID].Refuel(o_FuelType, i_FuelAmountToAdd);
         }
 
-        public bool IsVehicleInGarage(string i_licenseID)
+        public bool IsVehicleInGarage(string i_LicenseID)
         {
-            return r_vehicles.ContainsKey(i_licenseID);
+            return r_Vehicles.ContainsKey(i_LicenseID);
         }
 
-        public void RechargeVehicle(string i_licenseID, float i_minutesToCharge)
+        public void RechargeVehicle(string i_LicenseID, float i_MinutesToCharge)
         {
-            r_vehicles[i_licenseID].Recharge(i_minutesToCharge);
+            r_Vehicles[i_LicenseID].Recharge(i_MinutesToCharge);
         }
 
-        public Dictionary<string, string> GetAllDataForVehicle(string i_licenseID)
+        public Dictionary<string, string> GetAllDataForVehicle(string i_LicenseID)
         {
-            return r_vehicles[i_licenseID].GetAllDataForVehicle();
+            return r_Vehicles[i_LicenseID].GetAllDataForVehicle();
         }
 
-        public void SetUniqueMembers(string i_licenseID, Dictionary<string, string> i_filledUniqueData)
+        public void SetUniqueMembers(string i_LicenseID, Dictionary<string, string> i_FilledUniqueData)
         {
-            r_vehicles[i_licenseID].SetUniqueMembers(i_filledUniqueData);
+            r_Vehicles[i_LicenseID].SetUniqueMembers(i_FilledUniqueData);
         }
 
-        private void setEnergyPrecentageForVehicle(string i_licenseID, float i_newEnergyPrecentage)
+        private void setEnergyPrecentageForVehicle(string i_LicenseID, float i_NewEnergyPrecentage)
         {
-            r_vehicles[i_licenseID].SetEnergyPrecentage(i_newEnergyPrecentage);
+            r_Vehicles[i_LicenseID].SetEnergyPrecentage(i_NewEnergyPrecentage);
         }
 
         private enum eDbIndex

@@ -5,15 +5,15 @@ namespace Ex03.GarageLogic
 {
     public class VehicleDataAndStatus : VehicleCreator
     {
-        private readonly Vehicle r_vehicle;
-        private eVehicleStatuses m_status = eVehicleStatuses.WorkInProgress;
+        private readonly Vehicle r_Vehicle;
+        private eVehicleStatuses m_Status = eVehicleStatuses.WorkInProgress;
         public string OwnerName { get; private set; }
         public string OwnerPhoneNumber { get; private set; }
         public string LicenseId
         {
             get
             {
-                return r_vehicle.r_LicenseID;
+                return r_Vehicle.r_LicenseID;
             }
 
         }
@@ -22,11 +22,11 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_status;
+                return m_Status;
             }
             set
             {
-                m_status = value;
+                m_Status = value;
             }
 
         }
@@ -35,11 +35,11 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_status;
+                return m_Status;
             }
             set
             {
-                m_status = value;
+                m_Status = value;
             }
 
         }
@@ -48,7 +48,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_vehicle.TireCount;
+                return r_Vehicle.TireCount;
             }
 
         }
@@ -57,65 +57,65 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                string[] dataMembers = new string[r_vehicle.m_uniqueDataMembers.Count];
-                r_vehicle.m_uniqueDataMembers.CopyTo(dataMembers);
+                string[] dataMembers = new string[r_Vehicle.m_UniqueDataMembers.Count];
+                r_Vehicle.m_UniqueDataMembers.CopyTo(dataMembers);
 
                 return dataMembers;
             }
 
         }
 
-        public VehicleDataAndStatus(string i_vehicleType, string i_licenseID, string i_modelName, string i_ownerName, string i_ownerPhone)
+        public VehicleDataAndStatus(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone)
         {
-            r_vehicle = CreateVehicle(i_vehicleType, i_licenseID, i_modelName, i_ownerName, i_ownerPhone);
-            OwnerName = i_ownerName;
-            OwnerPhoneNumber = i_ownerPhone;
+            r_Vehicle = CreateVehicle(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone);
+            OwnerName = i_OwnerName;
+            OwnerPhoneNumber = i_OwnerPhone;
         }
 
         public void FillAirInAllTiresOfVehicle()
         {
-            r_vehicle.FillAirInTires();
+            r_Vehicle.FillAirInTires();
         }
 
-        public void Refuel(Vehicle.eFuelTypes i_fuelType, float i_fuelAmountToAdd)
+        public void Refuel(Vehicle.eFuelTypes i_FuelType, float i_FuelAmountToAdd)
         {
-            r_vehicle.AddToEnergySource(i_fuelAmountToAdd, i_fuelType);
+            r_Vehicle.AddToEnergySource(i_FuelAmountToAdd, i_FuelType);
         }
 
-        public void Recharge(float i_minutesToCharge)
+        public void Recharge(float i_MinutesToCharge)
         {
-            r_vehicle.AddToEnergySource(i_minutesToCharge);
+            r_Vehicle.AddToEnergySource(i_MinutesToCharge);
         }
 
-        internal void SetTireInfo(string[,] i_tireInfo)
+        internal void SetTireInfo(string[,] i_TireInfo)
         {
-            r_vehicle.SetTireInfo(i_tireInfo);
+            r_Vehicle.SetTireInfo(i_TireInfo);
         }
 
         internal Dictionary<string, string> GetAllDataForVehicle()
         {
-            Dictionary<string, string> VehicleData = r_vehicle.GetAllDataForVehicle();
+            Dictionary<string, string> VehicleData = r_Vehicle.GetAllDataForVehicle();
 
             VehicleData["Owner Name"] = OwnerName;
             VehicleData["Owner Phone"] = OwnerPhoneNumber;
-            VehicleData["Status"] = m_status.ToString();
+            VehicleData["Status"] = m_Status.ToString();
 
             return VehicleData;
         }
 
-        internal void SetUniqueMembers(Dictionary<string, string> i_filledUniqueData)
+        internal void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
         {
-            r_vehicle.SetUniqueMembers(i_filledUniqueData);
+            r_Vehicle.SetUniqueMembers(i_FilledUniqueData);
         }
 
-        internal void SetEnergyPrecentage(float i_newEnergyPrecentage)
+        internal void SetEnergyPrecentage(float i_NewEnergyPrecentage)
         {
-            if (i_newEnergyPrecentage < 0 || i_newEnergyPrecentage > 100)
+            if (i_NewEnergyPrecentage < 0 || i_NewEnergyPrecentage > 100)
             {
                 throw new ArgumentOutOfRangeException("Energy source precentage must be in the range 0 - 100.");
             }
 
-            r_vehicle.EnergySourcePercentage = i_newEnergyPrecentage;
+            r_Vehicle.EnergySourcePercentage = i_NewEnergyPrecentage;
         }
 
         public enum eVehicleStatuses

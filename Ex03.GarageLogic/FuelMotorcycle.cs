@@ -4,16 +4,16 @@ namespace Ex03.GarageLogic
 {
     public class FuelMotorcycle : Motorcycle
     {
-        private readonly FuelEngine r_engine = new FuelEngine(Vehicle.eFuelTypes.Octan98, 5.8f);
+        private readonly FuelEngine r_Engine = new FuelEngine(Vehicle.eFuelTypes.Octan98, 5.8f);
 
-        public FuelMotorcycle(string i_licenseID, string i_modelName) : base(i_modelName, i_licenseID)
+        public FuelMotorcycle(string i_LicenseID, string i_ModelName) : base(i_ModelName, i_LicenseID)
         {
 
         }
 
         internal override Vehicle.eFuelTypes GetFuelType()
         {
-            return r_engine.FuelType;
+            return r_Engine.FuelType;
         }
 
         internal override float EnergySourcePercentage
@@ -21,11 +21,11 @@ namespace Ex03.GarageLogic
             get
             {
 
-                return (r_engine.CurrentFuelAmount / r_engine.MaxFuelCapacity) * 100;
+                return (r_Engine.CurrentFuelAmount / r_Engine.MaxFuelCapacity) * 100;
             }
             set
             {
-                r_engine.CurrentFuelAmount = (value / 100) * r_engine.MaxFuelCapacity;
+                r_Engine.CurrentFuelAmount = (value / 100) * r_Engine.MaxFuelCapacity;
             }
 
         }
@@ -34,15 +34,15 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, string> vehicleData = base.GetAllDataForVehicle();
 
-            vehicleData["Fuel Type"] = r_engine.FuelType.ToString();
+            vehicleData["Fuel Type"] = r_Engine.FuelType.ToString();
             vehicleData["Fuel Tank Precentage"] = string.Format("{0}%", EnergySourcePercentage);
 
             return vehicleData;
         }
 
-        public override void AddToEnergySource(float i_energySourceAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.None)
+        public override void AddToEnergySource(float i_EnergySourceAmountToAdd, eFuelTypes i_FuelType = eFuelTypes.None)
         {
-            r_engine.Refuel(i_energySourceAmountToAdd, i_fuelType);
+            r_Engine.Refuel(i_EnergySourceAmountToAdd, i_FuelType);
         }
 
     }

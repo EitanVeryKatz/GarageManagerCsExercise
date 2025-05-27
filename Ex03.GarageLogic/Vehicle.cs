@@ -8,19 +8,19 @@ namespace Ex03.GarageLogic
     {
         protected class Wheel
         {
-            public string m_manufacturerName;
-            public readonly float r_maximumAllowedAirPressure;
+            public string m_ManufacturerName;
+            public readonly float r_MaximumAllowedAirPressure;
             public float CurrentAirPressure { get; set; }
 
             public Wheel(float i_MaximumAllowedAirPressure)
             {
-                r_maximumAllowedAirPressure = i_MaximumAllowedAirPressure;
+                r_MaximumAllowedAirPressure = i_MaximumAllowedAirPressure;
                 CurrentAirPressure = 0;
             }
 
             public void AddAir(float i_AirToAdd)
             {
-                if (CurrentAirPressure + i_AirToAdd <= r_maximumAllowedAirPressure)
+                if (CurrentAirPressure + i_AirToAdd <= r_MaximumAllowedAirPressure)
                 {
                     CurrentAirPressure += i_AirToAdd;
                 }
@@ -28,7 +28,7 @@ namespace Ex03.GarageLogic
                 {
                     throw new ValueOutOfRangeException(
                         0,
-                        r_maximumAllowedAirPressure - CurrentAirPressure,
+                        r_MaximumAllowedAirPressure - CurrentAirPressure,
                         "Cannot add air beyond the maximum allowed pressure.");
                 }
 
@@ -40,34 +40,34 @@ namespace Ex03.GarageLogic
 
         public readonly string r_ModelName;
         public readonly string r_LicenseID;
-        protected Wheel[] m_wheels;
-        internal List<string> m_uniqueDataMembers = new List<string>();
+        protected Wheel[] m_Wheels;
+        internal List<string> m_UniqueDataMembers = new List<string>();
         internal abstract float EnergySourcePercentage { get; set; }
 
         public int TireCount
         {
             get
             {
-                return m_wheels.Length;
+                return m_Wheels.Length;
             }
 
         }
 
-        public Vehicle(string i_modelName, string i_licenseID)
+        public Vehicle(string i_ModelName, string i_LicenseID)
         {
-            r_ModelName = i_modelName;
-            r_LicenseID = i_licenseID;
+            r_ModelName = i_ModelName;
+            r_LicenseID = i_LicenseID;
 
         }
 
-        internal void SetTireInfo(string[,] i_tireInfo)
+        internal void SetTireInfo(string[,] i_TireInfo)
         {
             for (int i = 0; i < TireCount; i++)
             {
-                m_wheels[i].m_manufacturerName = i_tireInfo[i, 0];
+                m_Wheels[i].m_ManufacturerName = i_TireInfo[i, 0];
                 try
                 {
-                    m_wheels[i].CurrentAirPressure = float.Parse(i_tireInfo[i, 1]);
+                    m_Wheels[i].CurrentAirPressure = float.Parse(i_TireInfo[i, 1]);
                 }
                 catch (FormatException)
                 {
@@ -80,9 +80,9 @@ namespace Ex03.GarageLogic
 
         public void FillAirInTires()
         {
-            foreach (Wheel wheel in m_wheels)
+            foreach (Wheel wheel in m_Wheels)
             {
-                float missingAir = wheel.r_maximumAllowedAirPressure - wheel.CurrentAirPressure;
+                float missingAir = wheel.r_MaximumAllowedAirPressure - wheel.CurrentAirPressure;
                 wheel.AddAir(missingAir);
             }
 
@@ -94,10 +94,10 @@ namespace Ex03.GarageLogic
 
             VehicleData["Vehicle Id"] = r_LicenseID;
             VehicleData["Model Name"] = r_ModelName;
-            for (int i = 0; i < m_wheels.Count(); i++)
+            for (int i = 0; i < m_Wheels.Count(); i++)
             {
-                VehicleData[$"Wheel #{i} Manufacturer"] = m_wheels[i].m_manufacturerName;
-                VehicleData[$"Wheel #{i} Air Pressure"] = m_wheels[i].CurrentAirPressure.ToString();
+                VehicleData[$"Wheel #{i} Manufacturer"] = m_Wheels[i].m_ManufacturerName;
+                VehicleData[$"Wheel #{i} Air Pressure"] = m_Wheels[i].CurrentAirPressure.ToString();
             }
 
             return VehicleData;
@@ -108,9 +108,9 @@ namespace Ex03.GarageLogic
             return eFuelTypes.None;
         }
 
-        public abstract void AddToEnergySource(float i_fuelAmountToAdd, eFuelTypes i_fuelType = eFuelTypes.None);
+        public abstract void AddToEnergySource(float i_FuelAmountToAdd, eFuelTypes i_FuelType = eFuelTypes.None);
 
-        internal abstract void SetUniqueMembers(Dictionary<string, string> i_filledUniqueData);
+        internal abstract void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData);
 
     }
 

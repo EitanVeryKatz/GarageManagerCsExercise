@@ -6,20 +6,20 @@
 
         public float MinutesLeftInBattery { get; set; }
 
-        public ElectricEngine(float i_maxBatteryMinutes)
+        public ElectricEngine(float i_MaxBatteryMinutes)
         {
-            MaxMinutesOfUsage = i_maxBatteryMinutes;
+            MaxMinutesOfUsage = i_MaxBatteryMinutes;
             MinutesLeftInBattery = 0;
         }
 
-        public void ChargeBattery(float i_amountToAdd)
+        public void ChargeBattery(float i_AmountToAdd)
         {
-            if (MinutesLeftInBattery + i_amountToAdd > MaxMinutesOfUsage)
+            if (MinutesLeftInBattery + i_AmountToAdd > MaxMinutesOfUsage)
             {
                 throw new ValueOutOfRangeException(0, MaxMinutesOfUsage - MinutesLeftInBattery);
             }
 
-            MinutesLeftInBattery += i_amountToAdd;
+            MinutesLeftInBattery += i_AmountToAdd;
         }
 
     }

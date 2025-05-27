@@ -11,16 +11,16 @@ namespace Ex03.GarageLogic
         public eCarColors Color { get; set; }
         public int NumberOfDoors { get; set; }
 
-        public Car(string i_modelName, string i_licenseID) : base(i_modelName, i_licenseID)
+        public Car(string i_ModelName, string i_LicenseID) : base(i_ModelName, i_LicenseID)
         {
-            base.m_wheels = new Wheel[k_NumOfWheels];
+            base.m_Wheels = new Wheel[k_NumOfWheels];
             for (int i = 0; i < k_NumOfWheels; i++)
             {
-                m_wheels[i] = new Wheel(k_MaximumWheelAirPressure);
+                m_Wheels[i] = new Wheel(k_MaximumWheelAirPressure);
             }
 
-            m_uniqueDataMembers.Add("Car Color");
-            m_uniqueDataMembers.Add("Amount of Doors");
+            m_UniqueDataMembers.Add("Car Color");
+            m_UniqueDataMembers.Add("Amount of Doors");
         }
 
         public enum eCarColors
@@ -41,10 +41,10 @@ namespace Ex03.GarageLogic
             return vehicleData;
         }
 
-        internal override void SetUniqueMembers(Dictionary<string, string> i_filledUniqueData)
+        internal override void SetUniqueMembers(Dictionary<string, string> i_FilledUniqueData)
         {
-            Color = (eCarColors)Enum.Parse(typeof(eCarColors), i_filledUniqueData["Car Color"]);
-            NumberOfDoors = int.Parse(i_filledUniqueData["Amount of Doors"]);
+            Color = (eCarColors)Enum.Parse(typeof(eCarColors), i_FilledUniqueData["Car Color"]);
+            NumberOfDoors = int.Parse(i_FilledUniqueData["Amount of Doors"]);
         }
 
     }
