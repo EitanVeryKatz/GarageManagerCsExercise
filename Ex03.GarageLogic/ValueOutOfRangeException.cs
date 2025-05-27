@@ -13,6 +13,12 @@ namespace Ex03.GarageLogic
             MaxValue = i_MaxValue;
         }
 
+        public ValueOutOfRangeException(float i_MinValue, string i_Message = null) : base(i_Message ?? $"Value is out of range. Must be at least {i_MinValue}.")
+        {
+            MinValue = i_MinValue;
+            MaxValue = float.MaxValue;
+        }
+
     }
 
 }

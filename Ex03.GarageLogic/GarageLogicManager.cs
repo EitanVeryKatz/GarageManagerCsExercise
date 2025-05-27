@@ -15,8 +15,8 @@ namespace Ex03.GarageLogic
 
         public void AddNewVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_currentEnergySourcePrecentage = 0)
         {
-            VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone, i_currentEnergySourcePrecentage);
-           newVehicle.SetEnergyPrecentage(i_currentEnergySourcePrecentage);
+            VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone);
+            newVehicle.SetEnergyPrecentage(i_currentEnergySourcePrecentage);
             m_Vehicles.Add(newVehicle.LicenseId, newVehicle);
         }
 
@@ -143,27 +143,35 @@ namespace Ex03.GarageLogic
                 string OwnerName = VehicleData[(int)eDbIndex.OwnerName];
                 string OwnerPhone = VehicleData[(int)eDbIndex.OwnerPhone];
 
-                AddNewVehicle(VehicleType, LicenceId, ModelName, OwnerName, OwnerPhone, CurrentFuelAmount);
-                string[] uniqueData = GetUniqueDataMembersOfVehicle(LicenceId);
-                Dictionary<string, string> FilledUniqueData = new Dictionary<string, string>();
-
-                for (int i = 0; i < uniqueData.Length; i++)
+                if (IsVehicleInGarage(LicenceId))
                 {
-                    FilledUniqueData[uniqueData[i]] = VehicleData[(int)eDbIndex.StartOfUniqueData + i];
+                    ChangeVehicleStatus(LicenceId);
                 }
-
-                int numOfTires = GetAmountOfTires(LicenceId);
-                string[,] wheelData = new string[numOfTires, 2];
-
-                for (int i = 0; i < numOfTires; i++)
+                else
                 {
-                    wheelData[i, 0] = tierModel;
-                    wheelData[i, 1] = CurrentAirPressure;
-                }
+                    AddNewVehicle(VehicleType, LicenceId, ModelName, OwnerName, OwnerPhone, CurrentFuelAmount);
+                    string[] uniqueData = GetUniqueDataMembersOfVehicle(LicenceId);
+                    Dictionary<string, string> FilledUniqueData = new Dictionary<string, string>();
 
-                UpdateTireInfoForNewVehicle(LicenceId, wheelData);
-                setEnergyPrecentageForVehicle(LicenceId, float.Parse(energyPrecentage));
-                SetUniqueMembers(LicenceId, FilledUniqueData);
+                    for (int i = 0; i < uniqueData.Length; i++)
+                    {
+                        FilledUniqueData[uniqueData[i]] = VehicleData[(int)eDbIndex.StartOfUniqueData + i];
+                    }
+
+                    int numOfTires = GetAmountOfTires(LicenceId);
+                    string[,] wheelData = new string[numOfTires, 2];
+
+                    for (int i = 0; i < numOfTires; i++)
+                    {
+                        wheelData[i, 0] = tierModel;
+                        wheelData[i, 1] = CurrentAirPressure;
+                    }
+
+                    UpdateTireInfoForNewVehicle(LicenceId, wheelData);
+                    setEnergyPrecentageForVehicle(LicenceId, float.Parse(energyPrecentage));
+                    SetUniqueMembers(LicenceId, FilledUniqueData);
+
+                }
 
             }
 

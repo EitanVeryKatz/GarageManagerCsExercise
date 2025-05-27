@@ -60,7 +60,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        public VehicleDataAndStatus(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_currentEnergySourcePrecentage = 0)
+        public VehicleDataAndStatus(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone)
         {
             r_vehicle = CreateVehicle(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone);
             OwnerName = i_OwnerName;
@@ -117,6 +117,10 @@ namespace Ex03.GarageLogic
 
         internal void SetEnergyPrecentage(float i_newEnergyPrecentage)
         {
+            if (i_newEnergyPrecentage < 0 || i_newEnergyPrecentage > 100)
+            {
+                throw new ArgumentOutOfRangeException("Energy source precentage must be in the range 0 - 100.");
+            }
             r_vehicle.EnergySourcePercentage = i_newEnergyPrecentage;
         }
 

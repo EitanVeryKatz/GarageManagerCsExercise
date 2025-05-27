@@ -49,6 +49,11 @@ namespace Ex03.GarageLogic
         {
             License = (eMotorcycleLicenseTypes)Enum.Parse(typeof(eMotorcycleLicenseTypes), i_FilledUniqueData["License Type"]);
             EngineVolume = int.Parse(i_FilledUniqueData["Engine Volume"]);
+            if (EngineVolume < 0)
+            {
+                throw new ValueOutOfRangeException(0);
+            }
+            
         }
 
     }
