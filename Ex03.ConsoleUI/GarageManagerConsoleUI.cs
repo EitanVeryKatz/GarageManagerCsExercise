@@ -8,6 +8,12 @@ namespace Ex03.ConsoleUI
     {
         private GarageLogicManager r_garageLogic = new GarageLogicManager();
         private readonly string[] r_validStatusArr = {"WorkInProgress","WorkFinished","Paid"};
+        public bool Running { get; private set; }
+
+        public GarageManagerConsoleUI()
+        {
+            Running = true;
+        }
 
         public void PrintMenu()
         {
@@ -62,7 +68,7 @@ namespace Ex03.ConsoleUI
                         showVehicleDetails();
                         break;
                     case 9:
-                        Environment.Exit(0);
+                        Running = false;
                         break;
                 }
 

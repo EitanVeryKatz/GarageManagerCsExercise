@@ -6,7 +6,7 @@
         {
             GarageManagerConsoleUI garageManagerConsoleUI = new GarageManagerConsoleUI();
 
-            while (true)
+            while (garageManagerConsoleUI.Running)
             {
                 garageManagerConsoleUI.PrintMenu();
                 garageManagerConsoleUI.GetUserChoice();
