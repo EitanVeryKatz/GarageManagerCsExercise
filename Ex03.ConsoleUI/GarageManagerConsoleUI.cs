@@ -100,9 +100,9 @@ namespace Ex03.ConsoleUI
 
                 Console.WriteLine("Please enter VehicleType:");
                 string vehicleType = Console.ReadLine();
-                float currentEnergySourcePrecentage = getValidatedFloatInput("Please enter Current Fuel/Battery Precentage");
+                float currentEnergySourcePercentage = getValidatedFloatInput("Please enter Current Fuel/Battery Percentage");
 
-                if (!isValidInput(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentEnergySourcePrecentage))
+                if (!isValidInput(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentEnergySourcePercentage))
                 {
                     Console.WriteLine("Invalid input. Vehicle not added.");
                 }
@@ -110,7 +110,7 @@ namespace Ex03.ConsoleUI
                 {
                     try
                     {
-                        r_GarageLogic.AddNewVehicle(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentEnergySourcePrecentage);
+                        r_GarageLogic.AddNewVehicle(vehicleType, licenseID, modelName, ownerName, ownerPhone, currentEnergySourcePercentage);
                         string[,] wheelData = collectWheelData(licenseID);
                         r_GarageLogic.UpdateTireInfoForNewVehicle(licenseID, wheelData);
 
@@ -205,7 +205,7 @@ namespace Ex03.ConsoleUI
             if (statusInput == "All")
             {
                 Console.WriteLine("Showing all vehicles.");
-                List<string> vehicles = r_GarageLogic.GetAllLicanseNumbersOfVehiclesInGarage();
+                List<string> vehicles = r_GarageLogic.GetAllLicenseIDsOfVehicles();
 
                 foreach (string vehicle in vehicles)
                 {
@@ -217,7 +217,7 @@ namespace Ex03.ConsoleUI
             {
                 if (isValidStatus(statusInput))
                 {
-                    List<string> vehicles = r_GarageLogic.GetAllLicanseNumbersOfVehiclesInGarage(statusInput);
+                    List<string> vehicles = r_GarageLogic.GetLicenseIDsOfVehiclesByStatus(statusInput);
 
                     Console.WriteLine($"Vehicles in garage with status {statusInput}:");
                     foreach (string vehicle in vehicles)

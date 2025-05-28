@@ -62,7 +62,7 @@ namespace Ex03.GarageLogic
             Dictionary<string, string> VehicleData = base.GetAllDataForVehicle();
 
             VehicleData["Fuel Type"] = "Soler";
-            VehicleData["Fuel Tank Precentage"] = string.Format("{0}%", EnergySourcePercentage);
+            VehicleData["Fuel Tank Percentage"] = string.Format("{0}%", EnergySourcePercentage);
             VehicleData["Holds Dangerous Material"] = HoldsDangerousMaterial.ToString();
             VehicleData["Cargo Volume"] = CargoVolume.ToString();
 

@@ -4,12 +4,12 @@
     {
         public static void Main()
         {
-            GarageManagerConsoleUI  garageManagerConsoleUI = new GarageManagerConsoleUI();
+            GarageManagerConsoleUI  GarageUIManager = new GarageManagerConsoleUI();
 
-            while (garageManagerConsoleUI.Running)
+            while (GarageUIManager.Running)
             {
-                garageManagerConsoleUI.PrintMenu();
-                garageManagerConsoleUI.GetUserChoice();
+                GarageUIManager.PrintMenu();
+                GarageUIManager.GetUserChoice();
             }
 
         }

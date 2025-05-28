@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
-    public class VehicleDataAndStatus : VehicleCreator
+    public class VehicleEntry : VehicleCreator
     {
         private readonly Vehicle r_Vehicle;
         private eVehicleStatuses m_Status = eVehicleStatuses.WorkInProgress;
@@ -17,21 +17,7 @@ namespace Ex03.GarageLogic
             }
 
         }
-
-        public eVehicleStatuses Status
-        {
-            get
-            {
-                return m_Status;
-            }
-            set
-            {
-                m_Status = value;
-            }
-
-        }
-
-        public eVehicleStatuses StatusOfVehicleInGarage
+        public eVehicleStatuses StatusOfVehicle
         {
             get
             {
@@ -65,14 +51,14 @@ namespace Ex03.GarageLogic
 
         }
 
-        public VehicleDataAndStatus(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone)
+        public VehicleEntry(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone)
         {
             r_Vehicle = CreateVehicle(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone);
             OwnerName = i_OwnerName;
             OwnerPhoneNumber = i_OwnerPhone;
         }
 
-        public void FillAirInAllTiresOfVehicle()
+        public void FillAirInAllTires()
         {
             r_Vehicle.FillAirInTires();
         }
@@ -108,14 +94,14 @@ namespace Ex03.GarageLogic
             r_Vehicle.SetUniqueMembers(i_FilledUniqueData);
         }
 
-        internal void SetEnergyPrecentage(float i_NewEnergyPrecentage)
+        internal void SetEnergyPercentage(float i_NewEnergyPercentage)
         {
-            if (i_NewEnergyPrecentage < 0 || i_NewEnergyPrecentage > 100)
+            if (i_NewEnergyPercentage < 0 || i_NewEnergyPercentage > 100)
             {
-                throw new ArgumentOutOfRangeException("Energy source precentage must be in the range 0 - 100.");
+                throw new ArgumentOutOfRangeException("Energy source Percentage must be in the range 0 - 100.");
             }
 
-            r_Vehicle.EnergySourcePercentage = i_NewEnergyPrecentage;
+            r_Vehicle.EnergySourcePercentage = i_NewEnergyPercentage;
         }
 
         public enum eVehicleStatuses

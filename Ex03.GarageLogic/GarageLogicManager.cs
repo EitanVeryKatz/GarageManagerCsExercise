@@ -7,13 +7,13 @@ namespace Ex03.GarageLogic
 {
     public class GarageLogicManager
     {
-        private readonly Dictionary<string, VehicleDataAndStatus> r_Vehicles = new Dictionary<string, VehicleDataAndStatus>();
+        private readonly Dictionary<string, VehicleEntry> r_Vehicles = new Dictionary<string, VehicleEntry>();
 
-        public void AddNewVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentEnergySourcePrecentage = 0)
+        public void AddNewVehicle(string i_VehicleType, string i_LicenseID, string i_ModelName, string i_OwnerName, string i_OwnerPhone, float i_CurrentEnergySourcePercentage = 0)
         {
-            VehicleDataAndStatus newVehicle = new VehicleDataAndStatus(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone);
+            VehicleEntry newVehicle = new VehicleEntry(i_VehicleType, i_LicenseID, i_ModelName, i_OwnerName, i_OwnerPhone);
 
-            newVehicle.SetEnergyPrecentage(i_CurrentEnergySourcePrecentage);
+            newVehicle.SetEnergyPercentage(i_CurrentEnergySourcePercentage);
             r_Vehicles.Add(newVehicle.LicenseId, newVehicle);
         }
 
@@ -24,7 +24,7 @@ namespace Ex03.GarageLogic
 
         public void ChangeVehicleStatus(string i_LicenseID, string i_newStatus ="WorkInProgress")
         {
-            r_Vehicles[i_LicenseID].Status = (VehicleDataAndStatus.eVehicleStatuses)Enum.Parse(typeof(VehicleDataAndStatus.eVehicleStatuses),i_newStatus);
+            r_Vehicles[i_LicenseID].StatusOfVehicle = (VehicleEntry.eVehicleStatuses)Enum.Parse(typeof(VehicleEntry.eVehicleStatuses),i_newStatus);
         }
 
         public int GetAmountOfTires(string i_LicenseID)
@@ -32,21 +32,21 @@ namespace Ex03.GarageLogic
             return r_Vehicles[i_LicenseID].TireCount;
         }
 
-        public List<string> GetAllLicanseNumbersOfVehiclesInGarage()
+        public List<string> GetAllLicenseIDsOfVehicles()
         {
             return r_Vehicles.Keys.ToList();
         }
 
-        public List<string> GetAllLicanseNumbersOfVehiclesInGarage(string i_statusStr)
+        public List<string> GetLicenseIDsOfVehiclesByStatus(string i_statusStr)
         {
             
             List<string> resaultList = new List<string>();
 
-            if (Enum.TryParse<VehicleDataAndStatus.eVehicleStatuses>(i_statusStr, out VehicleDataAndStatus.eVehicleStatuses o_status)) 
+            if (Enum.TryParse<VehicleEntry.eVehicleStatuses>(i_statusStr, out VehicleEntry.eVehicleStatuses o_status)) 
             {
                 foreach (string licanceId in r_Vehicles.Keys)
                 {
-                    if (r_Vehicles[licanceId].Status == o_status)
+                    if (r_Vehicles[licanceId].StatusOfVehicle == o_status)
                     {
                         resaultList.Add(licanceId);
                     }
@@ -64,7 +64,7 @@ namespace Ex03.GarageLogic
 
         public void FillAirInVehicle(string i_LicenseID)
         {
-            r_Vehicles[i_LicenseID].FillAirInAllTiresOfVehicle();
+            r_Vehicles[i_LicenseID].FillAirInAllTires();
         }
 
         public string[] GetUniqueDataMembersOfVehicle(string i_LicenseID)
@@ -104,9 +104,9 @@ namespace Ex03.GarageLogic
             r_Vehicles[i_LicenseID].SetUniqueMembers(i_FilledUniqueData);
         }
 
-        private void setEnergyPrecentageForVehicle(string i_LicenseID, float i_NewEnergyPrecentage)
+        private void setEnergyPercentageForVehicle(string i_LicenseID, float i_NewEnergyPercentage)
         {
-            r_Vehicles[i_LicenseID].SetEnergyPrecentage(i_NewEnergyPrecentage);
+            r_Vehicles[i_LicenseID].SetEnergyPercentage(i_NewEnergyPercentage);
         }
 
         private enum eDbIndex
@@ -114,7 +114,7 @@ namespace Ex03.GarageLogic
             VehicleType,
             LicenceID,
             ModelName,
-            EnergyPrecentage,
+            EnergyPercentage,
             TireModel,
             CurrentAirPressure,
             OwnerName,
@@ -138,7 +138,7 @@ namespace Ex03.GarageLogic
                 string vehicleType = vehicleData[(int)eDbIndex.VehicleType];
                 string licenceId = vehicleData[(int)eDbIndex.LicenceID];
                 string modelName = vehicleData[(int)eDbIndex.ModelName];
-                string energyPrecentage = vehicleData[(int)eDbIndex.EnergyPrecentage];
+                string energyPercentage = vehicleData[(int)eDbIndex.EnergyPercentage];
                 string tierModel = vehicleData[(int)eDbIndex.TireModel];
                 string currentAirPressure = vehicleData[(int)eDbIndex.CurrentAirPressure];
                 string ownerName = vehicleData[(int)eDbIndex.OwnerName];
@@ -169,7 +169,7 @@ namespace Ex03.GarageLogic
                     }
 
                     UpdateTireInfoForNewVehicle(licenceId, wheelData);
-                    setEnergyPrecentageForVehicle(licenceId, float.Parse(energyPrecentage));
+                    setEnergyPercentageForVehicle(licenceId, float.Parse(energyPercentage));
                     SetUniqueMembers(licenceId, filledUniqueData);
                 }
 

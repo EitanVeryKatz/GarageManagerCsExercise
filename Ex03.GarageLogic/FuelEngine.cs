@@ -22,10 +22,10 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Wrong fuel type.");
             }
 
-            AddFuel(i_AmountToAdd);
+            addFuel(i_AmountToAdd);
         }
 
-        public void AddFuel(float i_AmountToAdd)
+        private void addFuel(float i_AmountToAdd)
         {
             if (CurrentFuelAmount + i_AmountToAdd > MaxFuelCapacity)
             {
